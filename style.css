@@ -1,0 +1,27 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left_sidebar {
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.dashboard_content {
+    display: flex;
+}
+
+.players_content {
+    display: none;
+}
+
+.training_content {
+    display: none;
+}
