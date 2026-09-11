@@ -2,11 +2,9 @@
     <header>
         <title>Football Coach Assistant</title>
         <link rel="stylesheet" href="style.css">
+        <meta name = "viewport" content ="width=device-width,initial-scale=1.0">
     </header>
     <body>
-        <head>
-            <meta name = "viewport" content ="width=device-width,initial-scale=1.0">
-        </head>
         <div class = 'main'>
             <div class = 'left_sidebar'>
                 <button class = 'out_of_menu'>
@@ -21,10 +19,216 @@
                     ☰
                 </button>
                 <div class = 'dashboard_content'>
-                    <p>dashboard</p>
+                    <div class = "top_row">
+                        <div class = "introduction">
+                            <p>SUNDAY · 6TH SEPTEMBER 2026</p>
+                            <p>Hello, coach!</p>
+                        </div>
+                        <div class = "team_name">
+                            <p>Team name:</p>
+                            <p>FC Spartak Trnava B</p>
+                        </div>
+                        <div class = "team_logo">
+                            <img src = "images/logo.png" alt = "logo">
+                        </div>
+                    </div>
+                    <div class = "informations">
+                        <div class = "all_players">
+                            <p>All players</p>
+                            <p>12</p>
+                        </div>
+                        <div class = "current_form">
+                            <p>Current form</p>
+                            <p>3W 1D 1L</p>
+                            <p>Last 5 matches</p>
+                        </div>
+                        <div class = "next_training_info">
+                            <p>Next training info</p>
+                            <p>8.9.2026</p>
+                            <p>Tactical training - Pressing</p>
+                        </div>
+                        <div class = "suspended_players">
+                            <p>Suspended players</p>
+                            <p>1</p>
+                        </div>
+                    </div>
+                    <div class = "middle_row">
+                        <div class = "next_training_session">
+                            <p>Next training session</p>
+                            <p>Tactics</p>
+                            <p>Tactical training - Pressing</p>
+                            <p>8.9.2026</p>
+                            <p>90 min</p>
+                            <p>Intenzity: High</p>
+                            <button class = 'view_training_btn'>View training</button>
+                        </div>
+                        <div class = "next_match">
+                            <p>Next match</p>
+                            <p>Home</p>
+                            <p>vs ŠK Slovan Bratislava B</p>
+                            <p>II. liga SR</p>
+                            <p>13.9.2026 · 15:00</p>
+                            <p>Priorita - defenzivna kompaktnosť v prvom polčase.</p>
+                            <button class = 'view_match_btn'>View match</button>
+                        </div>
+                        <div class = "latest_result">
+                            <p>Latest result</p>
+                            <p>II. liga SR</p>
+                            <p>Away: MFK Ružomberok</p>
+                            <p>2:1</p>
+                            <p>Prehra 6.9.2026</p>
+                        </div>
+                    </div>
+                    <div class = "last_row">
+                        <div class = "player_performance">
+                            <p>Player performance</p>
+                            <button class = 'go_to_all_players_btn'>All players -></button> 
+                        </div>
+                        <div class = "last_tests">
+                            <p>Last tests</p>
+                            <button class = 'go_to_performance_btn'>Performance -></button>
+                        </div>
+                    </div>
                 </div>
                 <div class = 'players_content'>
-                    <p>players</p>
+                    <div class = 'players_first_row'>
+                        <div class = 'players_first_row_left'>
+                            <p>Players</p>
+                            <p>12 players · 10 active players</p>
+                        </div>
+                        <div class = 'players_first_row_right'>
+                            <button class = 'add_player_btn'>+ Add player</button>
+                        </div>
+                    </div>
+                    <div class = 'players_filters'>
+                        <div class = 'search_box'>
+                            <input type = 'text' placeholder = '⌕ Search player'>
+                        </div>
+                        <div class = 'filter' id = 'position_filter'>
+                            <select class="filter_select" id="position_filter">
+                                <option value="all">All positions</option>
+                                <option value="goalkeeper">Goalkeeper</option>
+                                <option value="center-back">Center-back</option>
+                                <option value="right-back">Right-back</option>
+                                <option value="left-back">Left-back</option>
+                                <option value="defensive-midfielder">Defensive midfielder</option>
+                                <option value="midfielder">Midfielder</option>
+                                <option value="attacking-midfielder">Attacking midfielder</option>
+                                <option value="right-wing">Right wing</option>
+                                <option value="left-wing">Left wing</option>
+                                <option value="striker">Striker</option>
+                            </select>
+                        </div>
+                        <div class="filter" id = 'status_filter'>
+                            <select class="filter_select" id="status_filter">
+                                <option value="all">All statuses</option>
+                                <option value="active">Active</option>
+                                <option value="injured">Injured</option>
+                                <option value="suspended">Suspended</option>
+                            </select>
+                        </div>
+                        <div class="view_switch">
+                            <button class="view_btn active" id="card_view_btn">
+                                ▦
+                            </button>
+                            <button class="view_btn" id="list_view_btn">
+                                ☰
+                            </button>
+                        </div>
+                        <span class="players_count">
+                            12 players
+                        </span>
+                    </div>
+                </div>
+                <div class = 'new_player'>
+                    <div class = 'new_player_introduction'>
+                        <button class = 'go_back_to_players'>Back to players</button>
+                        <p>Add a new player</p>
+                        <button class = 'save_player'>Save player</button>
+                    </div>
+                    <div class = 'new_player_info'>
+                        <div class = 'new_player_first_row'>
+                            <div class = 'new_player_name_div'>
+                                <label for = 'new_player_name'>Name</label>
+                                <input 
+                                    type = "text"
+                                    class = 'new_player_name'
+                                    placeholder = "Add a player name">
+                            </div>
+                            <div class = 'new_player_surname_div'>
+                                <label for = 'new_player_surname'>Surname</label>
+                                <input
+                                    type = "text"
+                                    class = 'new_player_surname'
+                                    placeholder = "Add a player surname">
+                            </div>
+                        </div>
+                        <div class = 'new_player_second_row'>
+                            <div class = 'new_player_age_div'>
+                                <label for = "new_player_age">Age</label>
+                                <input
+                                    type = "number"
+                                    class = 'new_player_age'
+                                    placeholder = "Add a player age">
+                            </div>
+                            <div class = 'new_player_height_div'>
+                                <label for = "new_player_height">Height</label>
+                                <input
+                                    type = "number"
+                                    class = 'new_player_height'
+                                    placeholder = "Add a player height">
+                            </div>
+                        </div>
+                        <div class = 'new_player_third_row'>
+                            <div class = 'new_player_weight_div'>
+                                <label for = "new_player_weight">Weight</label>
+                                <input
+                                    type = "number"
+                                    class = 'new_player_weight'
+                                    placeholder = "Add a player weight">
+                            </div>
+                            <div class = 'new_player_position_div'>
+                                <label for = "new_player_position">Position</label>
+                                <select class = 'new_player_position'>
+                                    <option value = "">Choose player position </option>
+                                    <option value="goalkeeper">Goalkeeper</option>
+                                    <option value="center-back">Center-back</option>
+                                    <option value="right-back">Right-back</option>
+                                    <option value="left-back">Left-back</option>
+                                    <option value="defensive-midfielder">Defensive midfielder</option>
+                                    <option value="midfielder">Midfielder</option>
+                                    <option value="attacking-midfielder">Attacking midfielder</option>
+                                    <option value="right-wing">Right wing</option>
+                                    <option value="left-wing">Left wing</option>
+                                    <option value="striker">Striker</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class = 'new_player_fourth_row'>
+                            <div class = 'new_player_dominant_leg_div'>
+                                <label for = "new_player_dominant_leg">Dominant leg</label>
+                                <select class = 'new_player_dominant_leg'>
+                                    <option value="right">Right</option>
+                                    <option value="left">Left</option>
+                                </select>
+                            </div>
+                            <div class = 'new_player_status_div'>
+                                <label for = 'new_player_status'>Status</label>
+                                <select class = 'new_player_status'>
+                                    <option value="active">Active</option>
+                                    <option value="injured">Injured</option>
+                                    <option value="suspended">Suspended</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class = 'notes_about_new_player_div'>
+                            <label for = 'notes_about_new_player'>Notes (optional)</label>
+                            <input
+                                type="text"
+                                class = 'notes_about_new_player'
+                                placeholder="More information about the new player...">
+                        </div>
+                    </div>
                 </div>
                 <div class = 'training_content'>
                     <p>training</p>
