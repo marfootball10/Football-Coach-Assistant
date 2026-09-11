@@ -230,9 +230,71 @@
                         </div>
                     </div>
                 </div>
-                <div class = 'training_content'>
-                    <p>training</p>
+                <div class="training_content">
+
+                    <div class="training_header">
+                        <div>
+                            <p class="training_title">Trainings</p>
+                            <p class="training_subtitle">0 trainings</p>
+                        </div>
+
+                        <button class="add_training_btn">+ Add training</button>
+                    </div>
+
+                    <div class="training_list"></div>
+
                 </div>
+
+                <dialog class="training_dialog">
+
+                    <form class="training_form">
+
+                        <h2>Add training</h2>
+
+                        <label for="training_name">Name of training</label>
+                        <input
+                            type="text"
+                            id="training_name"
+                            placeholder="Enter training name"
+                            required
+                        >
+
+                        <label for="training_date">Date</label>
+                        <input
+                            type="date"
+                            id="training_date"
+                            required
+                        >
+
+                        <label for="training_time">Time</label>
+                        <input
+                            type="time"
+                            id="training_time"
+                            required
+                        >
+
+                        <label for="training_duration">Duration</label>
+                        <input
+                            type="number"
+                            id="training_duration"
+                            placeholder="Duration in minutes"
+                            min="1"
+                            required
+                        >
+
+                        <div class="training_dialog_buttons">
+                            <button type="button" class="cancel_training_btn">
+                                Cancel
+                            </button>
+
+                            <button type="submit" class="save_training_btn">
+                                Add training
+                            </button>
+                        </div>
+
+                    </form>
+
+                </dialog>
             </div>
         </div>
         <script src="script.js"></script>
