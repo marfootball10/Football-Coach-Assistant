@@ -465,3 +465,70 @@ p {
     background-color: #00b87c;
     color: white;
 }
+
+.training_item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.training_item_header {
+    display: flex;
+    flex-direction: column;
+}
+
+.training_item_name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.training_item_info {
+    color: gray;
+    margin: 3px 0;
+}
+
+.training_item_details {
+    display: none;
+    margin-top: 15px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.training_item.expanded .training_item_details {
+    display: block;
+}
+
+.training_item_details p {
+    font-weight: bold;
+}
+
+.training_item_details ul {
+    margin: 5px 0;
+    padding-left: 20px;
+}
+
+
+/* Player selection inside dialog */
+
+.training_players_selection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.training_player_option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}

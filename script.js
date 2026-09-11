@@ -17,6 +17,7 @@ let training_form = document.querySelector(".training_form")
 let cancel_training_btn = document.querySelector(".cancel_training_btn")
 let training_list = document.querySelector(".training_list")
 let training_subtitle = document.querySelector(".training_subtitle")
+let training_players_selection = document.querySelector(".training_players_selection")
 
 class Player {
   constructor(name, surname) {
@@ -27,21 +28,32 @@ class Player {
 
 let players = []
 
+/*let players = [
+    new Player("Martin", "Novák"),
+    new Player("Peter", "Kováč"),
+    new Player("Lukáš", "Horváth"),
+    new Player("Tomáš", "Švec"),
+    new Player("Michal", "Baláž"),
+    new Player("Ján", "Varga"),
+    new Player("Matej", "Polák"),
+    new Player("Samuel", "Bartoš"),
+    new Player("Adam", "Krištof"),
+    new Player("Filip", "Tóth")
+]*/
+
 class Training {
-    constructor(name, date, time, duration) {
+    constructor(name, date, time, duration, players) {
         this.name = name
         this.date = date
         this.time = time
         this.duration = duration
-
+        this.players = players
     }
-
     saveTraining() {
         trainings.push(this)
         appendTraining(this)
         updateTrainingCount()
     }
-
 }
 
 let trainings = []
@@ -83,6 +95,7 @@ add_player_btn.addEventListener('click', function() {
 
 // Training tab
 add_training_btn.addEventListener("click", () => {
+    showTrainingPlayers()
     training_dialog.showModal()
 })
 cancel_training_btn.addEventListener("click", () => {
@@ -90,19 +103,26 @@ cancel_training_btn.addEventListener("click", () => {
 })
 training_form.addEventListener("submit", (event) => {
     event.preventDefault()
-
     let name = document.getElementById("training_name").value
     let date = document.getElementById("training_date").value
     let time = document.getElementById("training_time").value
     let duration = document.getElementById("training_duration").value
-
+    let selected_players = []
+    let checkboxes =
+        training_players_selection.querySelectorAll(
+            'input[type="checkbox"]:checked'
+        )
+    checkboxes.forEach((checkbox) => {
+        let player_index = Number(checkbox.value)
+        selected_players.push(players[player_index])
+    })
     let training = new Training(
         name,
         date,
         time,
-        duration
+        duration,
+        selected_players
     )
-
     training.saveTraining()
     training_form.reset()
     training_dialog.close()
@@ -111,19 +131,65 @@ training_form.addEventListener("submit", (event) => {
 function appendTraining(training) {
     let training_item = document.createElement("div")
     training_item.classList.add("training_item")
-    training_item.innerHTML = `
-        <p class="training_item_name">${training.name}</p>
-        <p class="training_item_info">
-            ${training.date} · ${training.time}
-        </p>
-        <p class="training_item_info">
-            Duration: ${training.duration} min
-        </p>
-    `
+    let training_header = document.createElement("div")
+    training_header.classList.add("training_item_header")
+    let name = document.createElement("p")
+    name.classList.add("training_item_name")
+    name.textContent = training.name
+    let info = document.createElement("p")
+    info.classList.add("training_item_info")
+    info.textContent = training.date + " · " + training.time + " · " + training.duration + " min"
+    training_header.appendChild(name)
+    training_header.appendChild(info)
+    let details = document.createElement("div")
+    details.classList.add("training_item_details")
+    let players_title = document.createElement("p")
+    players_title.textContent = "Players"
+    details.appendChild(players_title)
+    let players_list = document.createElement("ul")
+    training.players.forEach((player) => {
+        let player_item = document.createElement("li")
+        player_item.textContent =
+            player.name + " " + player.surname
+        players_list.appendChild(player_item)
+    })
+    details.appendChild(players_list)
+    training_item.appendChild(training_header)
+    training_item.appendChild(details)
+    training_item.addEventListener("click", () => {
+        training_item.classList.toggle("expanded")
+    })
     training_list.appendChild(training_item)
 }
 
 function updateTrainingCount() {
     training_subtitle.textContent =
         trainings.length + " trainings"
+}
+
+function showTrainingPlayers() {
+    training_players_selection.innerHTML = ""
+    if (players.length === 0) {
+        let message = document.createElement("p")
+        message.textContent = "No players available."
+        training_players_selection.appendChild(message)
+        return
+    }
+
+    players.forEach((player, index) => {
+        let player_div = document.createElement("div")
+        player_div.classList.add("training_player_option")
+
+        let checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        checkbox.value = index
+
+        let label = document.createElement("label")
+        label.textContent = player.name + " " + player.surname
+
+        player_div.appendChild(checkbox)
+        player_div.appendChild(label)
+
+        training_players_selection.appendChild(player_div)
+    })
 }
