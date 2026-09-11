@@ -10,6 +10,15 @@ let menu_toggle = document.querySelector(".menu_toggle")
 let left_sidebar = document.querySelector(".left_sidebar")
 let out_of_menu = document.querySelector(".out_of_menu")
 
+class Player {
+  constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
+}
+
+let players = []
+
 menu_toggle.addEventListener("click", function () {
     left_sidebar.classList.add("active")
     menu_toggle.style.display = 'none'
@@ -39,8 +48,6 @@ training_btn.addEventListener("click", () => {
     players_div.style.display = "none"
     training_div.style.display = "flex"
 })
-
-let players = []
 
 add_player_btn.addEventListener('click', function() {
     players_div.style.display = 'none'

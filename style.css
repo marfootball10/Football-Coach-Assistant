@@ -19,7 +19,7 @@ p {
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
@@ -55,6 +55,10 @@ p {
 
 .out_of_menu {
     display: none;
+}
+
+.content {
+    width: 100%;
 }
 
 .dashboard_content {
@@ -243,7 +247,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100vw;
+    width: 100%;
     height: 100%;
     border: 1px solid black;
 }
