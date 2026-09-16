@@ -35,7 +35,7 @@
                     <div class = "informations">
                         <div class = "all_players">
                             <p>All players</p>
-                            <p>12</p>
+                            <p class = 'players_count'>0</p>
                         </div>
                         <div class = "current_form">
                             <p>Current form</p>
@@ -94,7 +94,7 @@
                     <div class = 'players_first_row'>
                         <div class = 'players_first_row_left'>
                             <p>Players</p>
-                            <p>12 players · 10 active players</p>
+                            <p class = 'players_count'>0 players</p>
                         </div>
                         <div class = 'players_first_row_right'>
                             <button class = 'add_player_btn'>+ Add player</button>
@@ -102,9 +102,9 @@
                     </div>
                     <div class = 'players_filters'>
                         <div class = 'search_box'>
-                            <input type = 'text' placeholder = '⌕ Search player'>
+                            <input type = 'text' placeholder = '⌕  Search player'>
                         </div>
-                        <div class = 'filter' id = 'position_filter'>
+                        <div class = 'filter' id = 'position_filter_container'>
                             <select class="filter_select" id="position_filter">
                                 <option value="all">All positions</option>
                                 <option value="goalkeeper">Goalkeeper</option>
@@ -119,7 +119,7 @@
                                 <option value="striker">Striker</option>
                             </select>
                         </div>
-                        <div class="filter" id = 'status_filter'>
+                        <div class="filter" id = 'status_filter_container'>
                             <select class="filter_select" id="status_filter">
                                 <option value="all">All statuses</option>
                                 <option value="active">Active</option>
@@ -127,20 +127,10 @@
                                 <option value="suspended">Suspended</option>
                             </select>
                         </div>
-                        <div class="view_switch">
-                            <button class="view_btn active" id="card_view_btn">
-                                ▦
-                            </button>
-                            <button class="view_btn" id="list_view_btn">
-                                ☰
-                            </button>
-                        </div>
-                        <span class="players_count">
-                            12 players
-                        </span>
                     </div>
+                    <div class = 'new_players'></div>
                 </div>
-                <div class = 'new_player'>
+                <div class = 'new_player_div'>
                     <div class = 'new_player_introduction'>
                         <button class = 'go_back_to_players'>Back to players</button>
                         <p>Add a new player</p>
@@ -231,26 +221,18 @@
                     </div>
                 </div>
                 <div class="training_content">
-
                     <div class="training_header">
                         <div>
                             <p class="training_title">Trainings</p>
                             <p class="training_subtitle">0 trainings</p>
                         </div>
-
                         <button class="add_training_btn">+ Add training</button>
                     </div>
-
                     <div class="training_list"></div>
-
                 </div>
-
                 <dialog class="training_dialog">
-
                     <form class="training_form">
-
                         <h2>Add training</h2>
-
                         <label for="training_name">Name of training</label>
                         <input
                             type="text"
@@ -258,21 +240,18 @@
                             placeholder="Enter training name"
                             required
                         >
-
                         <label for="training_date">Date</label>
                         <input
                             type="date"
                             id="training_date"
                             required
                         >
-
                         <label for="training_time">Time</label>
                         <input
                             type="time"
                             id="training_time"
                             required
                         >
-
                         <label for="training_duration">Duration</label>
                         <input
                             type="number"
@@ -281,23 +260,17 @@
                             min="1"
                             required
                         >
-
                         <label>Players</label>
-
                         <div class="training_players_selection"></div>
-
                         <div class="training_dialog_buttons">
                             <button type="button" class="cancel_training_btn">
                                 Cancel
                             </button>
-
                             <button type="submit" class="save_training_btn">
                                 Add training
                             </button>
                         </div>
-
                     </form>
-
                 </dialog>
             </div>
         </div>

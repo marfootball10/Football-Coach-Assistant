@@ -1,3 +1,7 @@
+/* =========================================
+   ZÁKLAD
+========================================= */
+
 html,
 body {
     width: 100%;
@@ -8,6 +12,9 @@ body {
 
 body {
     overflow-x: hidden;
+    background-color: #080b12;
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
 }
 
 p {
@@ -15,24 +22,46 @@ p {
     padding: 0;
 }
 
+button,
+input,
+select {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   HLAVNÁ ŠTRUKTÚRA
+========================================= */
+
 .main {
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    background-color: #080b12;
 }
 
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
 .left_sidebar {
-    border-right: 1px solid black;
+    border-right: 1px solid #1e293b;
+    background-color: #080b12;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     padding-right: 100px;
     padding-top: 20px;
     gap: 20px;
+
+    box-sizing: border-box;
 }
 
 .btns_sidebar {
@@ -40,13 +69,25 @@ p {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     width: 100%;
+
     border: none;
-    background-color: white;
+    border-radius: 4px;
+
+    background-color: transparent;
+    color: #94a3b8;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
 .btns_sidebar:hover {
-    background-color: green;
+    background-color: #0f1724;
+    color: #f8fafc;
 }
 
 .menu_toggle {
@@ -57,31 +98,56 @@ p {
     display: none;
 }
 
+
+/* =========================================
+   CONTENT
+========================================= */
+
 .content {
     width: 100%;
+    min-height: 100vh;
+    background-color: #080b12;
 }
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
 
 .dashboard_content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100vw;
-    height: 100%;
-    border: 1px solid black;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background-color: #080b12;
+    color: #f8fafc;
+
+    box-sizing: border-box;
 }
+
+
+/* TOP ROW */
 
 .top_row {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
     width: 100%;
+
     font-size: 20px;
     line-height: 1;
+
     padding: 20px;
     padding-left: 20px;
-    border-bottom: 1px solid black;
+
+    border-bottom: 1px solid #1e293b;
+    box-sizing: border-box;
 }
 
 .introduction,
@@ -91,18 +157,41 @@ p {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     margin-left: 30px;
     padding-left: 15px;
 }
+
+.introduction p:first-child,
+.team_name p:first-child {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.introduction p:last-child,
+.team_name p:last-child {
+    color: #f8fafc;
+}
+
+
+/* =========================================
+   DASHBOARD INFORMATION CARDS
+========================================= */
+
 .informations {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
     width: 100%;
+
     font-size: 20px;
     line-height: 1;
+
     padding: 20px;
+
+    box-sizing: border-box;
 }
 
 .all_players,
@@ -113,23 +202,69 @@ p {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     width: 240px;
     height: 120px;
-    border: 1px solid black;
-    border-radius: 5px;
+
+    background-color: #0f1724;
+
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
     margin-left: 30px;
     padding-left: 15px;
+
+    box-sizing: border-box;
 }
+
+.all_players p:first-child,
+.current_form p:first-child,
+.next_training_info p:first-child,
+.suspended_players p:first-child {
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.all_players p:nth-child(2),
+.current_form p:nth-child(2),
+.suspended_players p:nth-child(2) {
+    color: #f8fafc;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.next_training_info p:nth-child(2) {
+    color: #f8fafc;
+    font-size: 18px;
+}
+
+.next_training_info p:nth-child(3),
+.current_form p:nth-child(3) {
+    color: #64748b;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   DASHBOARD MIDDLE ROW
+========================================= */
 
 .middle_row {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
     width: 100%;
+
     font-size: 20px;
     line-height: 1;
+
     padding: 20px;
+
+    box-sizing: border-box;
 }
 
 .next_training_session,
@@ -139,132 +274,421 @@ p {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     width: 270px;
     height: 340px;
-    border: 1px solid black;
-    border-radius: 5px;
+
+    background-color: #0f1724;
+
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
     margin-left: 50px;
     padding-left: 15px;
+
+    box-sizing: border-box;
 }
+
+.next_training_session p:first-child,
+.next_match p:first-child,
+.latest_result p:first-child {
+    color: #f8fafc;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.next_training_session p:not(:first-child),
+.next_match p:not(:first-child),
+.latest_result p:not(:first-child) {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.next_training_session p:nth-child(2) {
+    color: #3b82f6;
+}
+
+.latest_result p:nth-child(4) {
+    color: #f8fafc;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.latest_result p:last-child {
+    color: #ef4444;
+}
+
+
+/* =========================================
+   DASHBOARD BUTTONS
+========================================= */
+
+.view_training_btn,
+.view_match_btn,
+.go_to_all_players_btn,
+.go_to_performance_btn {
+    background-color: #0f1724;
+
+    color: #00d6a3;
+
+    border: 1px solid #087c69;
+    border-radius: 4px;
+
+    padding: 9px 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.view_training_btn:hover,
+.view_match_btn:hover,
+.go_to_all_players_btn:hover,
+.go_to_performance_btn:hover {
+    background-color: #12302e;
+}
+
+
+/* =========================================
+   DASHBOARD LAST ROW
+========================================= */
 
 .last_row {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: space-around;
+
     width: 100%;
+
     gap: 20px;
+
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.player_performance {
-    display: flex;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-
+.player_performance,
 .last_tests {
     display: flex;
-    border: 1px solid black;
-    border-radius: 5px;
+
+    width: 100%;
+
+    background-color: #0f1724;
+
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================
+   PLAYERS PAGE
+========================================= */
 
 .players_content {
     display: none;
+
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+
+    background-color: #080b12;
+
+    box-sizing: border-box;
 }
+
+
+/* PLAYERS HEADER */
 
 .players_first_row {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
     width: 100%;
+
     font-size: 20px;
     line-height: 1;
-    padding: 20px;
-    padding-left: 40px;
+
+    padding: 20px 40px;
+
+    box-sizing: border-box;
 }
+
+.players_first_row_left p:first-child {
+    color: #f8fafc;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.players_first_row_left .players_count {
+    color: #64748b;
+    font-size: 13px;
+    margin-left: 0;
+}
+
+
+/* ADD PLAYER */
 
 .add_player_btn {
     margin-left: 600px;
-    width: 100px;
-    height: 30px;
+
+    width: 120px;
+    height: 36px;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #00b87c;
+    color: #06100d;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
+
+.add_player_btn:hover {
+    background-color: #00d6a3;
+}
+
+
+/* =========================================
+   PLAYERS FILTERS
+========================================= */
 
 .players_filters {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
     width: 100%;
-    font-size: 20px;
-    line-height: 1;
+
+    padding: 10px 40px 20px;
+
+    box-sizing: border-box;
 }
 
-.search_players {
-    display: block;
+.search_box input {
     width: 300px;
-    height: 30px;
-    margin-left: 30px;
-    padding-left: 20px;
+    height: 36px;
+
+    background-color: #0f1724;
+    color: #cbd5e1;
+
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+
+    padding-left: 15px;
+
+    outline: none;
 }
+
+.search_box input::placeholder {
+    color: #64748b;
+}
+
+.search_box input:focus {
+    border-color: #087c69;
+}
+
 
 .filter {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    width: 300px;
-    height: 30px;
-    margin-left: 30px;
-    margin-right: 30px;
+
+    width: 220px;
+    height: 36px;
+
+    margin-left: 20px;
 }
 
-.view_switch {
+.filter_select {
+    width: 100%;
+    height: 36px;
+
+    background-color: #0f1724;
+    color: #cbd5e1;
+
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+
+    padding: 0 10px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.filter_select:focus {
+    border-color: #087c69;
+}
+
+
+/* =========================================
+   PLAYER CARDS
+========================================= */
+
+.new_players {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    width: 100%;
+
+    padding: 20px 40px;
+
+    box-sizing: border-box;
 }
 
-.view_btn {
-    margin-left: 0px;
-    height: 30px;
+.player_div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    width: 270px;
+    min-height: 180px;
+
+    background-color: #0f1724;
+
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
 }
 
-.players_count {
-    margin-left: 30px;
-    font-size: 20px;
-    line-height: 1;
+.player_div:hover {
+    background-color: #111c2b;
+    border-color: #28506a;
 }
 
-.new_player {
+.player_div p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.player_div p:first-child {
+    color: #f8fafc;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 0;
+}
+
+
+/* =========================================
+   ADD PLAYER PAGE
+========================================= */
+
+.new_player_div {
     display: none;
+
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+
     width: 100%;
-    height: 100%;
-    border: 1px solid black;
+    min-height: 100vh;
+
+    background-color: #080b12;
+
+    color: #f8fafc;
+
+    box-sizing: border-box;
 }
 
 .new_player_introduction {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 20px 40px;
+
+    border-bottom: 1px solid #1e293b;
+
+    box-sizing: border-box;
 }
+
+.new_player_introduction p {
+    color: #f8fafc;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.go_back_to_players {
+    background-color: #0f1724;
+    color: #cbd5e1;
+
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+
+    padding: 9px 15px;
+
+    cursor: pointer;
+}
+
+.go_back_to_players:hover {
+    background-color: #162235;
+}
+
+.save_player {
+    background-color: #00b87c;
+    color: #06100d;
+
+    border: none;
+    border-radius: 4px;
+
+    padding: 9px 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.save_player:hover {
+    background-color: #00d6a3;
+}
+
+
+/* PLAYER FORM */
 
 .new_player_info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+
     gap: 30px;
+
+    margin-top: 30px;
+    padding: 30px;
+
+    background-color: #0f1724;
+
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
+    box-sizing: border-box;
 }
 
 .new_player_first_row,
@@ -275,6 +699,7 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
     gap: 250px;
 }
 
@@ -284,67 +709,69 @@ p {
 .new_player_height_div,
 .new_player_weight_div,
 .new_player_position_div,
-.new_player_dominant_leg_div {
+.new_player_dominant_leg_div,
+.new_player_status_div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
 }
 
-.training_content {
-    display: none;
-    width: 100%;
-    height: 100%;
+.new_player_info label {
+    color: #94a3b8;
+    font-size: 13px;
 }
 
-@media (orientation:portrait), (max-width: 300px) {
+.new_player_info input,
+.new_player_info select {
+    height: 36px;
 
-    .menu_toggle {
-        display: block;
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1001;
-        font-size: 28px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
+    background-color: #080b12;
+    color: #cbd5e1;
 
-    .left_sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: clamp(280px, 50vw, 400px);
-        height: 100vh;
-        transform: translateX(-100%);
-        z-index: 1000;
-    }
+    border: 1px solid #1e293b;
+    border-radius: 4px;
 
-    .left_sidebar.active {
-        transform: translateX(0);
-    }
+    padding: 5px 10px;
 
-    .out_of_menu {
-        display: block;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 25px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
+    outline: none;
 }
 
-/* CSS potrebne pre tab na treningy */
-.training_content {
-    display: none;
+.new_player_info input:focus,
+.new_player_info select:focus {
+    border-color: #087c69;
+}
+
+.new_player_info input::placeholder {
+    color: #475569;
+}
+
+.notes_about_new_player_div {
+    display: flex;
     flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   TRAINING PAGE
+========================================= */
+
+.training_content {
+    display: none;
+
+    flex-direction: column;
+
     width: 100%;
     min-height: 100vh;
+
+    background-color: #080b12;
+
     box-sizing: border-box;
+
     padding: 30px;
 }
 
@@ -353,127 +780,83 @@ p {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
     width: 100%;
-    box-sizing: border-box;
 }
 
 .training_title {
+    color: #f8fafc;
     font-size: 28px;
+    font-weight: 600;
+
     margin: 0;
 }
 
 .training_subtitle {
-    color: gray;
+    color: #64748b;
+
     margin-top: 5px;
 }
 
 .add_training_btn {
     background-color: #00b87c;
-    color: white;
+    color: #06100d;
+
     border: none;
     border-radius: 4px;
+
     padding: 10px 18px;
+
+    font-weight: 600;
+
     cursor: pointer;
+
+    transition: 0.2s;
 }
 
 .add_training_btn:hover {
-    background-color: #009b69;
+    background-color: #00d6a3;
 }
+
+
+/* =========================================
+   TRAINING CARDS
+========================================= */
 
 .training_list {
     display: flex;
     flex-direction: column;
+
     gap: 15px;
+
     width: 100%;
+
     margin-top: 25px;
 }
 
 .training_item {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
+
+    width: 100%;
+
+    background-color: #0f1724;
+
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
+    padding: 18px;
+
     box-sizing: border-box;
-}
 
-.training_item_name {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 0 8px 0;
-}
-
-.training_item_info {
-    color: gray;
-    margin: 3px 0;
-}
-
-
-/* Vytvorit trrening dialog */
-
-.training_dialog {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 25px;
-    width: 350px;
-}
-
-.training_dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.training_form {
-    display: flex;
-    flex-direction: column;
-}
-
-.training_form h2 {
-    margin-top: 0;
-}
-
-.training_form label {
-    margin-top: 12px;
-    margin-bottom: 5px;
-}
-
-.training_form input {
-    height: 30px;
-    box-sizing: border-box;
-    padding: 5px;
-}
-
-.training_dialog_buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.cancel_training_btn,
-.save_training_btn {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
+
+    transition: 0.2s;
 }
 
-.cancel_training_btn {
-    background-color: #ddd;
-}
-
-.save_training_btn {
-    background-color: #00b87c;
-    color: white;
-}
-
-.training_item {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    box-sizing: border-box;
-    cursor: pointer;
+.training_item:hover {
+    background-color: #111c2b;
+    border-color: #28506a;
 }
 
 .training_item_header {
@@ -482,20 +865,32 @@ p {
 }
 
 .training_item_name {
+    color: #f8fafc;
+
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
+
     margin: 0 0 8px 0;
 }
 
 .training_item_info {
-    color: gray;
+    color: #64748b;
+
+    font-size: 13px;
+
     margin: 3px 0;
 }
 
+
+/* TRAINING DETAILS */
+
 .training_item_details {
     display: none;
+
     margin-top: 15px;
-    border-top: 1px solid #ccc;
+
+    border-top: 1px solid #1e293b;
+
     padding-top: 10px;
 }
 
@@ -504,25 +899,121 @@ p {
 }
 
 .training_item_details p {
-    font-weight: bold;
+    color: #cbd5e1;
+    font-weight: 600;
 }
 
 .training_item_details ul {
+    color: #94a3b8;
+
     margin: 5px 0;
     padding-left: 20px;
 }
 
 
-/* Player selection inside dialog */
+/* =========================================
+   TRAINING DIALOG
+========================================= */
+
+.training_dialog {
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+
+    padding: 25px;
+
+    width: 350px;
+
+    background-color: #0f1724;
+    color: #f1f5f9;
+}
+
+.training_dialog::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.training_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.training_form h2 {
+    color: #f8fafc;
+    margin-top: 0;
+}
+
+.training_form label {
+    color: #94a3b8;
+
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+.training_form input {
+    height: 30px;
+
+    background-color: #080b12;
+    color: #cbd5e1;
+
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+
+    padding: 5px;
+}
+
+.training_form input:focus {
+    border-color: #087c69;
+    outline: none;
+}
+
+.training_dialog_buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.cancel_training_btn,
+.save_training_btn {
+    padding: 8px 15px;
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.cancel_training_btn {
+    background-color: #1e293b;
+    color: #cbd5e1;
+}
+
+.save_training_btn {
+    background-color: #00b87c;
+    color: #06100d;
+}
+
+
+/* =========================================
+   PLAYERS IN TRAINING DIALOG
+========================================= */
 
 .training_players_selection {
     display: flex;
     flex-direction: column;
+
     gap: 8px;
+
     max-height: 150px;
+
     overflow-y: auto;
-    border: 1px solid #ccc;
+
+    background-color: #080b12;
+
+    border: 1px solid #1e293b;
     border-radius: 4px;
+
     padding: 10px;
 }
 
@@ -530,5 +1021,121 @@ p {
     display: flex;
     flex-direction: row;
     align-items: center;
+
     gap: 8px;
+
+    color: #cbd5e1;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (orientation: portrait), (max-width: 700px) {
+
+    .menu_toggle {
+        display: block;
+
+        position: fixed;
+
+        top: 20px;
+        left: 20px;
+
+        z-index: 1001;
+
+        font-size: 28px;
+
+        color: #f8fafc;
+
+        background: none;
+        border: none;
+
+        cursor: pointer;
+    }
+
+    .left_sidebar {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: clamp(280px, 50vw, 400px);
+        height: 100vh;
+
+        background-color: #080b12;
+
+        transform: translateX(-100%);
+
+        z-index: 1000;
+
+        transition: transform 0.2s;
+    }
+
+    .left_sidebar.active {
+        transform: translateX(0);
+    }
+
+    .out_of_menu {
+        display: block;
+
+        position: absolute;
+
+        top: 20px;
+        right: 20px;
+
+        font-size: 25px;
+
+        color: #f8fafc;
+
+        background: none;
+        border: none;
+
+        cursor: pointer;
+    }
+
+    .informations {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .all_players,
+    .current_form,
+    .next_training_info,
+    .suspended_players {
+        margin-left: 0;
+    }
+
+    .middle_row {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .next_training_session,
+    .next_match,
+    .latest_result {
+        margin-left: 0;
+    }
+
+    .players_filters {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .filter {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .add_player_btn {
+        margin-left: 20px;
+    }
+
+    .new_player_first_row,
+    .new_player_second_row,
+    .new_player_third_row,
+    .new_player_fourth_row {
+        flex-direction: column;
+        gap: 20px;
+    }
 }

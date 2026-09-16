@@ -1,18 +1,22 @@
 let dashboard_btn = document.getElementById("dashboard_btn")
 let players_btn = document.getElementById("players_btn")
 let training_btn = document.getElementById("training_btn")
-let add_player_btn = document.querySelector('.add_player_btn')
-let back_to_players = document.querySelector('.go_back_to_players')
-let save_player_btn = document.querySelector('.save_player')
 let dashboard_div = document.querySelector(".dashboard_content")
 let players_div = document.querySelector(".players_content")
 let training_div = document.querySelector(".training_content")
-let new_player_div = document.querySelector('.new_player')
 let menu_toggle = document.querySelector(".menu_toggle")
 let left_sidebar = document.querySelector(".left_sidebar")
 let out_of_menu = document.querySelector(".out_of_menu")
 
-// Traning tab DOM queries
+//Players tab DOM queries
+let add_player_btn = document.querySelector('.add_player_btn')
+let back_to_players = document.querySelector('.go_back_to_players')
+let save_player_btn = document.querySelector('.save_player')
+let new_player_div = document.querySelector('.new_player_div')
+let new_players = document.querySelector('.new_players')
+let players_count = document.querySelectorAll('.players_count')
+
+// Tranings tab DOM queries
 let add_training_btn = document.querySelector(".add_training_btn")
 let training_dialog = document.querySelector(".training_dialog")
 let training_form = document.querySelector(".training_form")
@@ -29,7 +33,7 @@ class Player {
     this.height = height;
     this.weight = weight;
     this.position = position;
-    this.dminant_leg = dominant_leg;
+    this.dominant_leg = dominant_leg;
     this.status = status;
     this.notes = notes;
   }
@@ -83,18 +87,21 @@ dashboard_btn.addEventListener("click", () => {
     players_div.style.display = "none"
     training_div.style.display = "none"
     dashboard_div.style.display = "flex"
+    new_player_div.style.display = "none"
 })
 
 players_btn.addEventListener("click", () => {
     dashboard_div.style.display = "none"
     training_div.style.display = "none"
     players_div.style.display = "flex"
+    new_player_div.style.display = "none"
 })
 
 training_btn.addEventListener("click", () => {
     dashboard_div.style.display = "none"
     players_div.style.display = "none"
     training_div.style.display = "flex"
+    new_player_div.style.display = "none"
 })
 
 add_player_btn.addEventListener('click', function() {
@@ -202,6 +209,7 @@ function showTrainingPlayers() {
         training_players_selection.appendChild(player_div)
     })
 }
+
 back_to_players.addEventListener('click', function() {
     new_player_div.style.display = 'none'
     players_div.style.display = 'flex'
@@ -218,7 +226,38 @@ save_player_btn.addEventListener('click', function() {
     let status = document.querySelector('.new_player_status').value
     let notes = document.querySelector('.notes_about_new_player').value
     players.push(new Player(name, surname, age, height, weight, position, dominant_leg, status, notes))
+
+    show_players()
+    update_players_count()
+
     new_player_div.style.display = 'none'
-    players_div.style.display = 'flex'
-    
+    players_div.style.display = 'flex' 
 })
+
+function show_players () {
+    new_players.innerHTML = ''
+    
+    players.forEach((player) => {
+        let player_div = document.createElement("div")
+        player_div.classList.add("player_div")
+        let name = document.createElement("p")
+        name.textContent = player.name + " " + player.surname
+        let age = document.createElement("p")
+        age.textContent = player.age
+        let position = document.createElement("p")
+        position.textContent = player.position
+        let status = document.createElement("p")
+        status.textContent = player.status
+        
+        player_div.appendChild(name)
+        player_div.appendChild(age)
+        player_div.appendChild(position)
+        player_div.appendChild(status)
+        new_players.appendChild(player_div)
+    })
+}
+
+function update_players_count() {
+    players_count[0].textContent = players.length
+    players_count[1].textContent = players.length + ' players'
+}
