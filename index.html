@@ -12,7 +12,8 @@
                 </button>
                 <button class = 'btns_sidebar' id = 'dashboard_btn'>Dashboard</button>
                 <button class = 'btns_sidebar' id = 'players_btn'>Players</button>
-                <button class = 'btns_sidebar' id = 'training_btn'>Training</button>
+                <button class = 'btns_sidebar' id = 'training_btn'>Trainings</button>
+                <button class = 'btns_sidebar' id = 'matches_btn'>Matches</button>
             </div>
             <div class = 'content'>
                 <button class='menu_toggle'>
@@ -49,7 +50,7 @@
                         </div>
                         <div class = "suspended_players">
                             <p>Suspended players</p>
-                            <p>1</p>
+                            <p id = 'suspended_players_count'>0</p>
                         </div>
                     </div>
                     <div class = "middle_row">
@@ -126,6 +127,14 @@
                                 <option value="injured">Injured</option>
                                 <option value="suspended">Suspended</option>
                             </select>
+                        </div>
+                        <div class="view_switch">
+                            <button class="view_btn active" id="card_view_btn">
+                                ▦
+                            </button>
+                            <button class="view_btn" id="list_view_btn">
+                                ☰
+                            </button>
                         </div>
                     </div>
                     <div class = 'new_players'></div>
@@ -268,6 +277,60 @@
                             </button>
                             <button type="submit" class="save_training_btn">
                                 Add training
+                            </button>
+                        </div>
+                    </form>
+                </dialog>
+                <div class = matches_content>
+                    <div class = 'matches_intro'>
+                        <div class = 'matches_info'>
+                            <p class = "match_title">Matches</p>
+                            <p class = "match_subtitle">0 matches</p>
+                        </div>
+                        <button class = 'new_match_btn'> + New match</button>
+                    </div>
+                    <div class="match_list"></div>
+                </div>
+                <dialog class="match_dialog">
+                    <form class="match_form">
+                        <h2>New match</h2>
+                        <label for="opponents_name">Name of the opponent</label>
+                        <input
+                            type="text"
+                            id="opponents_name"
+                            placeholder="Enter opponent's name"
+                            required
+                        >
+                        <label for="match_date">Date</label>
+                        <input
+                            type="date"
+                            id="match_date"
+                            required
+                        >
+                        <label for="match_time">Time</label>
+                        <input
+                            type="time"
+                            id="match_time"
+                            required
+                        >
+                        <label for="match_place">Place</label>
+                        <select class = "match_place">
+                            <option value = "home">Home</option>
+                            <option value = "away">Away</option>
+                        </select>
+                        <label for="match_league">League</label>
+                        <input
+                            type="text"
+                            id="match_league"
+                            placeholder="Enter the league you play in"
+                            required
+                        >
+                        <div class="match_dialog_buttons">
+                            <button type="button" class="cancel_match_btn">
+                                Cancel
+                            </button>
+                            <button type="submit" class="save_match_btn">
+                                Save match
                             </button>
                         </div>
                     </form>
