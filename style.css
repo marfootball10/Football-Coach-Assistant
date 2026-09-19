@@ -1023,127 +1023,708 @@ select {
     padding-left: 20px;
 }
 
+/* =========================================
+   TRAINING DETAILS
+========================================= */
+.training_details_page {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+.training_details_top {
+    width: 100%;
+    padding: 0 0 15px 0;
+}
+.back_to_trainings_btn {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 11px;
+    cursor: pointer;
+}
+.back_to_trainings_btn:hover {
+    color: #f8fafc;
+}
+.training_details_header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 20px;
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.training_details_header_left {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.training_details_name {
+    margin: 0 0 6px 0;
+    color: #f8fafc;
+    font-size: 17px;
+    font-weight: 600;
+}
+.training_details_description {
+    max-width: 700px;
+    margin: 0 0 10px 0;
+    color: #94a3b8;
+    font-size: 10px;
+    line-height: 1.5;
+}
+.training_details_summary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.training_details_summary span {
+    color: #64748b;
+    font-size: 10px;
+}
+.training_details_status {
+    padding: 5px 8px;
+    border: 1px solid #087c69;
+    border-radius: 3px;
+    background-color: #082c2a;
+    color: #00d6a3;
+    font-size: 9px;
+    white-space: nowrap;
+}
+.training_details_tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+    border-bottom: 1px solid #1e293b;
+}
+.training_tab {
+    padding: 0 12px 10px 0;
+    margin-right: 20px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    color: #64748b;
+    font-size: 10px;
+    cursor: pointer;
+}
+.training_tab:hover {
+    color: #cbd5e1;
+}
+.training_tab.active {
+    border-bottom-color: #00d6a3;
+    color: #00d6a3;
+}
+.training_information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+}
+.training_goal_card,
+.training_detail_card {
+    min-height: 125px;
+    padding: 15px;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.training_detail_label {
+    margin: 0 0 18px 0;
+    color: #64748b;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.training_detail_goal {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 11px;
+}
+.training_detail_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.training_detail_row span {
+    color: #64748b;
+    font-size: 9px;
+}
+.training_detail_row strong {
+    color: #f8fafc;
+    font-size: 9px;
+}
 
 /* =========================================
    TRAINING DIALOG
 ========================================= */
 
 .training_dialog {
+    width: 420px;
+    max-width: calc(100% - 40px);
+
+    padding: 0;
+
     border: 1px solid #1e293b;
-    border-radius: 6px;
-
-    padding: 25px;
-
-    width: 350px;
+    border-radius: 8px;
 
     background-color: #0f1724;
-    color: #f1f5f9;
+    color: #f8fafc;
+
+    box-sizing: border-box;
 }
 
 .training_dialog::backdrop {
     background: rgba(0, 0, 0, 0.65);
 }
 
+
+/* =========================================
+   TRAINING FORM
+========================================= */
+
 .training_form {
     display: flex;
     flex-direction: column;
+
+    width: 100%;
+
+    padding: 20px;
+
+    box-sizing: border-box;
 }
 
-.training_form h2 {
+
+/* =========================================
+   TRAINING DIALOG HEADER
+========================================= */
+
+.training_dialog_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: 10px;
+}
+
+.training_dialog_header h2 {
+    margin: 0;
+
     color: #f8fafc;
-    margin-top: 0;
+
+    font-size: 16px;
+    font-weight: 600;
 }
 
-.training_form label {
-    color: #94a3b8;
+.close_training_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    margin-top: 12px;
+    width: 24px;
+    height: 24px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #64748b;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.close_training_btn:hover {
+    color: #f8fafc;
+}
+
+
+/* =========================================
+   TRAINING FORM GROUP
+========================================= */
+
+.training_form_group {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+.training_form_group label {
     margin-bottom: 5px;
+
+    color: #64748b;
+
+    font-size: 9px;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.training_form input {
-    height: 30px;
-
-    background-color: #080b12;
-    color: #cbd5e1;
+.training_form_group input,
+.training_form_group select,
+.training_form_group textarea {
+    width: 100%;
 
     border: 1px solid #1e293b;
     border-radius: 4px;
 
-    padding: 5px;
-}
+    background-color: #080b12;
+    color: #cbd5e1;
 
-.training_form input:focus {
-    border-color: #087c69;
     outline: none;
+
+    box-sizing: border-box;
 }
 
-.training_form input[type="date"]::-webkit-calendar-picker-indicator,
-.training_form input[type="time"]::-webkit-calendar-picker-indicator {
+.training_form_group input,
+.training_form_group select {
+    height: 36px;
+
+    padding: 0 9px;
+
+    font-size: 11px;
+}
+
+.training_form_group textarea {
+    min-height: 70px;
+
+    padding: 9px;
+
+    resize: vertical;
+
+    font-size: 11px;
+
+    font-family: inherit;
+}
+
+.training_form_group input::placeholder,
+.training_form_group textarea::placeholder {
+    color: #475569;
+}
+
+.training_form_group input:focus,
+.training_form_group select:focus,
+.training_form_group textarea:focus {
+    border-color: #087c69;
+}
+
+
+/* =========================================
+   TWO COLUMN ROW
+========================================= */
+
+.training_form_row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    width: 100%;
+}
+
+
+/* =========================================
+   DATE / TIME ICONS
+========================================= */
+
+.training_form_group input[type="date"]::-webkit-calendar-picker-indicator,
+.training_form_group input[type="time"]::-webkit-calendar-picker-indicator {
     filter: invert(75%);
+
     cursor: pointer;
 }
 
+
+/* =========================================
+   TRAINING DIALOG BUTTONS
+========================================= */
+
 .training_dialog_buttons {
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
 
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
 
-    margin-top: 20px;
+    gap: 8px;
+
+    width: 100%;
+
+    margin-top: 16px;
 }
 
 .cancel_training_btn,
 .save_training_btn {
-    padding: 8px 15px;
+    height: 36px;
 
-    border: none;
     border-radius: 4px;
+
+    font-size: 11px;
+    font-weight: 600;
 
     cursor: pointer;
 }
 
 .cancel_training_btn {
-    background-color: #1e293b;
-    color: #cbd5e1;
+    border: 1px solid #1e293b;
+
+    background-color: #0f1724;
+    color: #94a3b8;
+}
+
+.cancel_training_btn:hover {
+    background-color: #162235;
 }
 
 .save_training_btn {
+    border: none;
+
     background-color: #00b87c;
     color: #06100d;
 }
 
-
-/* =========================================
-   PLAYERS IN TRAINING DIALOG
-========================================= */
-
-.training_players_selection {
-    display: flex;
-    flex-direction: column;
-
-    gap: 8px;
-
-    max-height: 150px;
-
-    overflow-y: auto;
-
-    background-color: #080b12;
-
-    border: 1px solid #1e293b;
-    border-radius: 4px;
-
-    padding: 10px;
+.save_training_btn:hover {
+    background-color: #00d6a3;
 }
 
-.training_player_option {
+/* =========================================
+   TRAINING EXERCISES
+========================================= */
+.training_exercises {
+    display: none;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+}
+.exercise_column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 220px;
+    flex-shrink: 0;
+}
+.exercise_item {
+    padding: 10px 12px;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    background-color: #0f1724;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.exercise_item:hover {
+    border-color: #28506a;
+}
+.exercise_item.selected {
+    border-color: #087c69;
+    background-color: #0d2b25;
+}
+.exercise_item_name {
+    margin: 0 0 4px 0;
+    color: #f8fafc;
+    font-size: 11px;
+    font-weight: 600;
+}
+.exercise_item.selected .exercise_item_name {
+    color: #00d6a3;
+}
+.exercise_item_info {
+    margin: 0;
+    color: #64748b;
+    font-size: 9px;
+}
+.add_exercise_btn {
+    padding: 10px;
+    border: 1px dashed #1e293b;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #64748b;
+    font-size: 10px;
+    cursor: pointer;
+}
+.add_exercise_btn:hover {
+    border-color: #087c69;
+    color: #00d6a3;
+}
+.exercise_detail {
+    flex-grow: 1;
+    min-height: 200px;
+    padding: 15px;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.exercise_detail_name {
+    margin: 0 0 4px 0;
+    color: #00d6a3;
+    font-size: 13px;
+    font-weight: 600;
+}
+.exercise_detail_info {
+    margin: 0 0 14px 0;
+    color: #64748b;
+    font-size: 9px;
+}
+.exercise_block_label {
+    margin: 0 0 3px 0;
+    color: #64748b;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.exercise_block_value {
+    margin: 0 0 12px 0;
+    color: #f8fafc;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.exercise_block_value.green_value {
+    color: #00d6a3;
+}
+.exercise_block_value.orange_value {
+    color: #f97316;
+}
+.exercise_empty {
+    margin: 0;
+    color: #64748b;
+    font-size: 10px;
+}
+
+/* =========================================
+   TACTICAL BOARD
+========================================= */
+.training_board {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+}
+.board_toolbar {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 10px;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    background-color: #0f1724;
+}
+.board_toolbar_label {
+    margin-right: 5px;
+    color: #64748b;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.board_tool,
+.board_undo_btn,
+.board_clear_btn {
+    padding: 5px 9px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #080b12;
+    color: #94a3b8;
+    font-size: 9px;
+    cursor: pointer;
+}
+.board_tool:hover,
+.board_undo_btn:hover,
+.board_clear_btn:hover {
+    color: #f8fafc;
+    border-color: #28506a;
+}
+.board_tool.active {
+    border-color: #087c69;
+    background-color: #12302e;
+    color: #00d6a3;
+}
+.board_undo_btn {
+    margin-left: auto;
+}
+.tactical_board {
+    width: 100%;
+    height: auto;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    cursor: crosshair;
+    touch-action: none;
+}
+.board_legend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    color: #64748b;
+    font-size: 9px;
+}
+.legend_item::before {
+    content: "—— ";
+    letter-spacing: -1px;
+}
+.legend_arrow {
+    color: #f8fafc;
+}
+.legend_movement {
+    color: #facc15;
+}
+.legend_pass {
+    color: #38bdf8;
+}
+.add_token_btn {
+    padding: 4px 9px;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    background-color: #080b12;
+    font-size: 9px;
+    cursor: pointer;
+}
+.add_token_btn.own_token {
+    color: #22c55e;
+}
+.add_token_btn.opponent_token {
+    color: #f97316;
+}
+.add_token_btn:hover {
+    border-color: #28506a;
+}
+.board_hint {
+    margin-left: auto;
+}
 
+/* =========================================
+   PLAYERS AT TRAINING
+========================================= */
+.training_attendance {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 12px;
+    padding: 15px;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.attendance_title {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 13px;
+    font-weight: 600;
+}
+.attendance_subtitle {
+    margin: 3px 0 14px 0;
+    color: #64748b;
+    font-size: 9px;
+}
+.attendance_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 8px;
-
+}
+.attendance_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 11px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #080b12;
     color: #cbd5e1;
+    font-size: 10px;
+    cursor: pointer;
+}
+.attendance_item:hover {
+    border-color: #28506a;
+}
+.attendance_item.checked {
+    border-color: #087c69;
+    background-color: #0d2b25;
+    color: #00d6a3;
+}
+.attendance_item input {
+    accent-color: #00b87c;
+    cursor: pointer;
+}
+.attendance_position {
+    margin-left: auto;
+    color: #64748b;
+    font-size: 9px;
+}
+.attendance_empty {
+    margin: 0;
+    color: #64748b;
+    font-size: 10px;
+}
+.exercise_dialog {
+    width: 420px;
+    max-width: calc(100% - 40px);
+    padding: 0;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    background-color: #0f1724;
+    color: #f8fafc;
+    box-sizing: border-box;
+}
+.exercise_dialog::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}
+.exercise_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.exercise_form .training_form_group,
+.exercise_form .training_form_row,
+.exercise_form .training_dialog_buttons {
+    width: 100%;
+}
+.cancel_exercise_btn,
+.save_exercise_btn {
+    height: 36px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.cancel_exercise_btn {
+    border: 1px solid #1e293b;
+    background-color: #0f1724;
+    color: #94a3b8;
+}
+.save_exercise_btn {
+    border: none;
+    background-color: #00b87c;
+    color: #06100d;
+}
+.save_exercise_btn:hover {
+    background-color: #00d6a3;
 }
 
 /* =========================
