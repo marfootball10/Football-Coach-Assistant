@@ -113,17 +113,60 @@ let players = []
     new Player("Filip", "Tóth")
 ]*/
 
+const TRAININGS_COOKIE_NAME = "trainings"
+const TRAININGS_COOKIE_MAX_AGE = 60 * 60 * 24 * 365
+
+function generateTrainingId() {
+  return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2)
+}
+
+function getTrainingsFromCookie() {
+  let prefix = TRAININGS_COOKIE_NAME + "="
+
+  for (let cookie of document.cookie.split(";")) {
+    cookie = cookie.trim()
+
+    if (cookie.startsWith(prefix)) {
+      try {
+        let trainings = JSON.parse(
+          decodeURIComponent(cookie.substring(prefix.length))
+        )
+
+        return Array.isArray(trainings) ? trainings : []
+      } catch {
+        return []
+      }
+    }
+  }
+
+  return []
+}
+
+function saveTrainingsToCookie() {
+  let data = trainings.map((training) => ({
+    id: training.id,
+    name: training.name,
+    date: training.date,
+    time: training.time,
+    duration: training.duration,
+    intensity: training.intensity,
+    category: training.category,
+    goal: training.goal,
+    description: training.description
+  }))
+
+  document.cookie =
+    TRAININGS_COOKIE_NAME +
+    "=" +
+    encodeURIComponent(JSON.stringify(data)) +
+    "; max-age=" +
+    TRAININGS_COOKIE_MAX_AGE +
+    "; path=/; samesite=lax"
+}
+
 class Training {
-    constructor(
-        name,
-        date,
-        time,
-        duration,
-        intensity,
-        category,
-        goal,
-        description
-    ) {
+    constructor(name, date, time, duration, intensity, category, goal, description, id = generateTrainingId()) {
+        this.id = id
         this.name = name
         this.date = date
         this.time = time
@@ -132,6 +175,7 @@ class Training {
         this.category = category
         this.goal = goal
         this.description = description
+
         this.exercises = []
         this.attendance = []
         this.board = { tokens: defaultBoardTokens(), shapes: [] }
@@ -141,6 +185,7 @@ class Training {
         trainings.push(this)
         appendTraining(this)
         updateTrainingCount()
+        saveTrainingsToCookie()
     }
 }
 
@@ -912,4 +957,33 @@ function appendMatch(match) {
 
 function updateMatchCount() {
     match_subtitle.textContent = matches.length + " matches"
+}
+
+function loadTrainingsFromCookie() {
+    let saved_trainings = getTrainingsFromCookie()
+
+    saved_trainings.forEach((training) => {
+        let loaded_training = new Training(
+            training.name,
+            training.date,
+            training.time,
+            training.duration,
+            training.intensity,
+            training.category,
+            training.goal,
+            training.description,
+            training.id
+        )
+
+        trainings.push(loaded_training)
+        appendTraining(loaded_training)
+    })
+
+    updateTrainingCount()
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadTrainingsFromCookie)
+} else {
+    loadTrainingsFromCookie()
 }
