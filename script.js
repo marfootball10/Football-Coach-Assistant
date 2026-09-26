@@ -2,6 +2,8 @@ let dashboard_btn = document.getElementById("dashboard_btn")
 let players_btn = document.getElementById("players_btn")
 let training_btn = document.getElementById("training_btn")
 let matches_btn = document.getElementById("matches_btn")
+let performance_btn = document.getElementById("performance_btn")
+let analysis_btn = document.getElementById("analysis_btn")
 let dashboard_div = document.querySelector(".dashboard_content")
 let players_div = document.querySelector(".players_content")
 let training_div = document.querySelector(".training_content")
@@ -16,7 +18,6 @@ let back_to_players = document.querySelector('.go_back_to_players')
 let save_player_btn = document.querySelector('.save_player')
 let new_player_div = document.querySelector('.new_player_div')
 let new_players = document.querySelector('.new_players')
-let new_player_errors = document.querySelector('.new_player_errors')
 let players_count = document.querySelectorAll('.players_count')
 let card_view_btn = document.querySelector("#card_view_btn")
 let list_view_btn = document.querySelector("#list_view_btn")
@@ -32,6 +33,33 @@ let close_training_btn = document.querySelector(".close_training_btn")
 let training_list = document.querySelector(".training_list")
 let training_subtitle = document.querySelector(".training_subtitle")
 let delete_training_btn = document.querySelector(".delete_training_btn")
+let add_testing_btn = document.querySelector(".add_testing_btn")
+let testing_session_div = document.querySelector(".testing_session_div")
+let back_to_trainings_from_testing_btn = document.querySelector(".back_to_trainings_from_testing_btn")
+let create_testing_btn = document.querySelector(".create_testing_btn")
+let testing_all_players_checkbox = document.querySelector(".testing_all_players_checkbox")
+let testing_players_list = document.querySelector(".testing_players_list")
+let testing_disciplines_groups = document.querySelector(".testing_disciplines_groups")
+let testing_protocol_page = document.querySelector(".testing_protocol_page")
+let back_to_trainings_from_protocol_btn = document.querySelector(".back_to_trainings_from_protocol_btn")
+let testing_protocol_name = document.querySelector(".testing_protocol_name")
+let testing_protocol_meta = document.querySelector(".testing_protocol_meta")
+let testing_protocol_players_count = document.querySelector(".testing_protocol_players_count")
+let testing_protocol_tests_count = document.querySelector(".testing_protocol_tests_count")
+let testing_protocol_status_badge = document.querySelector(".testing_protocol_status_badge")
+let testing_protocol_list = document.querySelector(".testing_protocol_list")
+let active_testing_session = null
+let testing_test_detail_page = document.querySelector(".testing_test_detail_page")
+let back_to_testing_protocol_btn = document.querySelector(".back_to_testing_protocol_btn")
+let testing_test_detail_category = document.querySelector(".testing_test_detail_category")
+let testing_test_detail_name = document.querySelector(".testing_test_detail_name")
+let testing_test_detail_measurement = document.querySelector(".testing_test_detail_measurement")
+let testing_test_detail_unit = document.querySelector(".testing_test_detail_unit")
+let testing_test_detail_attempts = document.querySelector(".testing_test_detail_attempts")
+let testing_instructions_text = document.querySelector(".testing_instructions_text")
+let testing_results_list = document.querySelector(".testing_results_list")
+let save_testing_results_btn = document.querySelector(".save_testing_results_btn")
+let active_testing_test = null
 
 // Training details tabs DOM queries
 let training_details_page = document.querySelector(".training_details_page")
@@ -155,18 +183,149 @@ class Player {
 
 let players = []
 
-/*let players = [
-    new Player("Martin", "Novák"),
-    new Player("Peter", "Kováč"),
-    new Player("Lukáš", "Horváth"),
-    new Player("Tomáš", "Švec"),
-    new Player("Michal", "Baláž"),
-    new Player("Ján", "Varga"),
-    new Player("Matej", "Polák"),
-    new Player("Samuel", "Bartoš"),
-    new Player("Adam", "Krištof"),
-    new Player("Filip", "Tóth")
-]*/
+let TEST_CATALOG = {
+    physical: [
+        { key: "sprint_10m", name: "10m Sprint", measurement: "time", unit: "seconds", attempts: 3 },
+        { key: "sprint_20m", name: "20m Sprint", measurement: "time", unit: "seconds", attempts: 3 },
+        { key: "sprint_30m", name: "30m Sprint", measurement: "time", unit: "seconds", attempts: 3 },
+        { key: "top_speed", name: "Top Speed", measurement: "speed", unit: "km/h", attempts: 1 },
+        { key: "acceleration", name: "Acceleration", measurement: "speed", unit: "m/s²", attempts: 1 },
+        { key: "agility", name: "Agility", measurement: "time", unit: "seconds", attempts: 3 },
+        { key: "endurance", name: "Yo-Yo / Endurance Test", measurement: "distance", unit: "meters", attempts: 1 }
+    ],
+    technical: [
+        { key: "ball_control", name: "Ball Control", measurement: "score", unit: "%", attempts: 1 },
+        { key: "passing_accuracy", name: "Passing Accuracy", measurement: "fraction", unit: "%", attempts: 1 },
+        { key: "finishing", name: "Finishing", measurement: "fraction", unit: "%", attempts: 1 },
+        { key: "weak_foot", name: "Weak Foot", measurement: "score", unit: "%", attempts: 1 },
+        { key: "dribbling", name: "Dribbling", measurement: "score", unit: "%", attempts: 1 }
+    ],
+    defensive: [
+        { key: "one_v_one", name: "1v1 Defending", measurement: "fraction", unit: "%", attempts: 1 },
+        { key: "tackling", name: "Tackling", measurement: "fraction", unit: "%", attempts: 1 },
+        { key: "interceptions", name: "Interceptions", measurement: "fraction", unit: "%", attempts: 1 },
+        { key: "defensive_positioning", name: "Defensive Positioning", measurement: "score", unit: "%", attempts: 1 },
+        { key: "duel_success", name: "Duel Success", measurement: "fraction", unit: "%", attempts: 1 }
+    ],
+    mental: [
+        { key: "decision_making", name: "Decision Making", measurement: "score", unit: "%", attempts: 1 },
+        { key: "concentration", name: "Concentration", measurement: "score", unit: "%", attempts: 1 },
+        { key: "composure", name: "Composure", measurement: "score", unit: "%", attempts: 1 },
+        { key: "awareness", name: "Awareness", measurement: "score", unit: "%", attempts: 1 },
+        { key: "reaction_to_pressure", name: "Reaction to Pressure", measurement: "score", unit: "%", attempts: 1 }
+    ]
+}
+let CATEGORY_DEFAULT_GROUPS = {
+    full_performance: ["physical", "technical", "defensive", "mental"],
+    physical: ["physical"],
+    technical: ["technical"],
+    tactical: ["defensive"],
+    mental: ["mental"],
+    custom: []
+}
+let GROUP_LABELS = {
+    physical: "Physical",
+    technical: "Technical",
+    defensive: "Defensive",
+    mental: "Mental"
+}
+let MEASUREMENT_LABELS = {
+    time: "Time",
+    speed: "Speed",
+    distance: "Distance",
+    score: "Score",
+    fraction: "Accuracy"
+}
+let TEST_INSTRUCTIONS = {
+    sprint_10m: "Mark a straight 10 meter track with a clearly marked start and finish line. The player starts in a stationary position behind the start line. On the coach's signal, the player accelerates at maximum effort and continues at full speed past the finish line. Start the timer at the signal and stop it when the player crosses the finish line. Each player completes 3 attempts with sufficient recovery time between them. Record every attempt and use the best (lowest) time as the main result.",
+    sprint_20m: "Mark a straight 20 meter track. The player starts behind the start line in a stationary position. On the coach's signal, the player accelerates at maximum intensity and continues through the finish line without slowing down. Record the time of every attempt. The player completes 3 attempts with sufficient rest between them. Use the fastest time as the main result.",
+    sprint_30m: "Mark a straight 30 meter sprint track. The player starts behind the start line. On the signal, the player accelerates at maximum speed and keeps maximum effort until the finish line. The player completes 3 attempts. Allow sufficient recovery between attempts. Record all times and use the fastest attempt as the main result.",
+    top_speed: "Set up a straight sprint track with enough space for acceleration before the measured zone. The player builds up speed and enters the measured zone at maximum velocity. The highest speed reached inside the measured zone is recorded. The player completes 2-3 attempts with full recovery between them. Record the highest value achieved.",
+    acceleration: "Mark a short sprint track with a clear start and finish point. The player starts from a stationary position. On the coach's signal, the player accelerates immediately at maximum effort. Measure the time needed to cover the set distance. The player completes 3 attempts with sufficient rest between them. Record every time and use the best time as the main result.",
+    agility: "Set up an agility course using cones according to the planned pattern. The player must complete the entire course as fast as possible without skipping or touching any cones. Explain the exact route before the test. The player completes 2-3 attempts. Record the time of each attempt and the number of errors. Use the best valid time as the main result.",
+    endurance: "Mark two parallel lines according to the selected Yo-Yo protocol. The player runs between the lines in time with the audio signal. Each shuttle is followed by a prescribed recovery period. The pace increases progressively according to the protocol. The test continues until the player can no longer keep up with the required pace or fails to meet the stopping criteria. Record the final level reached and the total distance covered.",
+    ball_control: "Set up a marked control zone. The player receives the ball from a defined direction and must bring it under control within the zone using the first touch or a specified touch. Use identical conditions for every attempt. Perform 20 attempts. Mark each attempt as successful or unsuccessful based on whether the player keeps the ball under control inside the zone.",
+    passing_accuracy: "Mark the player's starting position and the target zones. The player performs passes into the marked targets. Use the same distance and conditions for every attempt. The player performs 30 passes. Mark each pass as successful or unsuccessful depending on whether the ball lands inside the target zone. Calculate the final passing accuracy percentage.",
+    finishing: "Mark the shooting position and the target zones inside the goal. The player performs 20 shooting attempts according to the set protocol. Ensure identical or clearly defined conditions before every attempt. Record whether each shot results in a goal. Record the total number of attempts and the resulting conversion rate.",
+    weak_foot: "Perform the test exclusively with the player's non-dominant foot. Use the same type of task as the corresponding technical test, but every attempt must be performed with the weaker foot. Perform 20 attempts. Record successful and unsuccessful attempts and compare the result against the defined criteria.",
+    dribbling: "Set up a slalom course using cones according to the plan. The player must dribble the ball through the entire course and pass every cone in the correct order without skipping any. Record the time and the number of errors. Perform 2-3 attempts. Use the best valid time as the main result and log any errors made.",
+    one_v_one: "Mark out a 1v1 area with a clear attacking target zone. The attacker starts with the ball and the defender takes a set starting position. The duel begins on the coach's signal. The defender tries to stop the attacker from reaching the target zone or completing the attacking action. Perform 10 repetitions. Record the successful and unsuccessful defensive situations.",
+    tackling: "Mark out an area for the duel and define clear rules for a successful tackle. The attacker dribbles the ball toward the target zone. The defender attempts to make a clean tackle and win the ball. Perform 10 situations. Record every successful and unsuccessful tackle. Only count tackles performed according to the defined rules.",
+    interceptions: "Create a passing lane between the player who passes and the player who receives the ball. The defender takes a set position between them. After the pass, the defender attempts to read the direction of the ball and intercept it. Perform 15 situations. Record every successful interception and the total number of attempts.",
+    defensive_positioning: "Set up a game situation with an attacker, the ball and a defender. The defender must position themselves correctly relative to the ball, the attacker, the space and the defended target. Perform a series of repetitions from different starting positions. After each situation, assess whether the defensive position was correct according to the defined criteria.",
+    duel_success: "Set up repeated 1v1 duel situations according to the defined protocol. Every player completes the same number of duels under comparable conditions. After each duel, record whether the player won or lost. Calculate the final percentage of duels won.",
+    decision_making: "Create a game situation in which the player has more than one possible solution. The player must evaluate the available information and choose and execute an appropriate solution. Do not tell the player the correct answer in advance. Perform 20 situations. Record the decision made and assess it against the predefined correct solution for that situation.",
+    concentration: "Set up a series of repetitions with identical rules and controlled conditions. The player must follow the instructions and react correctly to each task throughout the entire test. Perform 20 repetitions. Record every error caused by a lapse in concentration, an incorrect execution of the instruction, or a premature reaction. Calculate the result from the total number of correct reactions.",
+    composure: "Create a situation in which the player is exposed to time pressure or match-like pressure. The player must complete the set technical or decision-making task without unnecessarily losing control. Perform 10-20 repetitions according to the chosen protocol. Observe the quality of execution, the decision made and the number of errors under pressure. Assess the performance against the predefined criteria.",
+    awareness: "Create a situation in which the player must scan their surroundings before receiving or playing the ball. Place relevant cues in the space, such as a teammate, an opponent or a target zone. The player must assess the situation and then perform the correct action. Perform 20 repetitions. Record correct and incorrect decisions.",
+    reaction_to_pressure: "Create a game situation in which the player receives the ball and is immediately put under pressure by an opponent. The player must evaluate the situation as quickly as possible and choose an appropriate solution. Vary the direction and type of pressure so the player cannot predict the situation. Perform 10-20 repetitions. Record the quality and success rate of the reaction under pressure."
+}
+let TEST_NOTE_PLACEHOLDERS = {
+    sprint_10m: "e.g. Strong start, slightly hesitant first two steps.",
+    sprint_20m: "e.g. Good acceleration phase, maintained speed well.",
+    sprint_30m: "e.g. Slight drop-off in the final 10 meters.",
+    top_speed: "e.g. Reached top speed later than expected.",
+    acceleration: "e.g. Explosive first steps, good drive phase.",
+    agility: "e.g. Lost time on the change of direction to the left.",
+    endurance: "e.g. Maintained pace well until the final stages.",
+    ball_control: "e.g. Clean first touch under pressure.",
+    passing_accuracy: "e.g. Consistent accuracy on the long diagonal.",
+    finishing: "e.g. Good technique, needs improvement with weak foot.",
+    weak_foot: "e.g. Noticeably less confident and less accurate.",
+    dribbling: "e.g. Good close control, lost pace on tight turns.",
+    one_v_one: "e.g. Delayed the attacker well, timing could improve.",
+    tackling: "e.g. Clean, well-timed tackle.",
+    interceptions: "e.g. Read the passing lane early and well.",
+    defensive_positioning: "e.g. Good body orientation relative to the ball.",
+    duel_success: "e.g. Strong and consistent in physical duels.",
+    decision_making: "e.g. Recognized the passing option quickly.",
+    concentration: "e.g. Lost focus slightly in the second half of the test.",
+    composure: "e.g. Stayed composed despite time pressure.",
+    awareness: "e.g. Checked shoulder before receiving the ball.",
+    reaction_to_pressure: "e.g. Reacted quickly and calmly under pressure."
+}
+
+function getOrdinal(number) {
+    let last_two_digits = number % 100
+    if (last_two_digits >= 11 && last_two_digits <= 13) {
+        return number + "th"
+    }
+    let last_digit = number % 10
+    if (last_digit === 1) {
+        return number + "st"
+    }
+    if (last_digit === 2) {
+        return number + "nd"
+    }
+    if (last_digit === 3) {
+        return number + "rd"
+    }
+    return number + "th"
+}
+
+class TestingSession {
+    constructor(name, date, time, location, coach, category, notes, id = generateTrainingId()) {
+        this.id = id
+        this.type = "testing"
+        this.name = name
+        this.date = date
+        this.time = time
+        this.location = location
+        this.coach = coach
+        this.category = category
+        this.notes = notes
+        this.players = []
+        this.tests = []
+        this.status = "not_started"
+    }
+    saveTestingSession() {
+        testing_sessions.push(this)
+        appendTestingSession(this)
+        updateTrainingCount()
+    }
+}
+
+let testing_sessions = []
 
 const TRAININGS_COOKIE_NAME = "trainings"
 const TRAININGS_COOKIE_MAX_AGE = 60 * 60 * 24 * 365
@@ -344,7 +503,7 @@ let current_date = document.querySelector(".current_date")
 
 current_date.textContent =
     day_name + " · " +
-    current_date_time.date + ". " +
+    getOrdinal(current_date_time.date) + " " +
     month_name + " " +
     current_date_time.year
 
@@ -403,9 +562,381 @@ training_btn.addEventListener("click", () => {
     matches_div.style.display = "none"
     new_player_div.style.display = "none"
     training_details_page.style.display = "none"
+    testing_session_div.style.display = "none"
+    testing_protocol_page.style.display = "none"
+    testing_test_detail_page.style.display = "none"
     training_list.style.display = "flex"
     document.querySelector(".training_header").style.display = "flex"
 })
+
+add_testing_btn.addEventListener("click", () => {
+    document.querySelector(".testing_name").value = ""
+    document.querySelector(".testing_date").value = ""
+    document.querySelector(".testing_time").value = ""
+    document.querySelector(".testing_location").value = ""
+    document.querySelector(".testing_coach").value = ""
+    document.querySelector(".testing_category").value = "full_performance"
+    document.querySelector(".testing_notes").value = ""
+    clearTestingErrors()
+    training_list.style.display = "none"
+    document.querySelector(".training_header").style.display = "none"
+    showTestingPlayers()
+    showTestingDisciplines("full_performance")
+    testing_session_div.style.display = "flex"
+})
+function clearTestingErrors() {
+    document.querySelector(".testing_name").classList.remove("input_error")
+    document.querySelector(".testing_date").classList.remove("input_error")
+    document.querySelector(".testing_time").classList.remove("input_error")
+    testing_players_list.classList.remove("section_error")
+    testing_disciplines_groups.classList.remove("section_error")
+}
+back_to_trainings_from_testing_btn.addEventListener("click", () => {
+    testing_session_div.style.display = "none"
+    training_list.style.display = "flex"
+    document.querySelector(".training_header").style.display = "flex"
+})
+document.querySelector(".testing_category").addEventListener("change", (event) => {
+    showTestingDisciplines(event.target.value)
+})
+testing_all_players_checkbox.addEventListener("change", () => {
+    let checked = testing_all_players_checkbox.checked
+    testing_players_list.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+        checkbox.checked = checked
+        checkbox.closest(".testing_player_option").classList.toggle("checked", checked)
+    })
+})
+function showTestingPlayers() {
+    testing_players_list.innerHTML = ""
+    testing_all_players_checkbox.checked = false
+    if (players.length === 0) {
+        let message = document.createElement("p")
+        message.classList.add("attendance_empty")
+        message.textContent = "No players in the squad yet."
+        testing_players_list.appendChild(message)
+        return
+    }
+    players.forEach((player) => {
+        let option = document.createElement("label")
+        option.classList.add("testing_player_option")
+        let checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        checkbox.value = player.name + " " + player.surname
+        let name = document.createElement("span")
+        name.textContent = player.name + " " + player.surname
+        checkbox.addEventListener("change", () => {
+            option.classList.toggle("checked", checkbox.checked)
+        })
+        option.appendChild(checkbox)
+        option.appendChild(name)
+        testing_players_list.appendChild(option)
+    })
+}
+function showTestingDisciplines(category) {
+    testing_disciplines_groups.innerHTML = ""
+    let default_groups = CATEGORY_DEFAULT_GROUPS[category] || []
+    Object.keys(TEST_CATALOG).forEach((group_key) => {
+        let group_div = document.createElement("div")
+        group_div.classList.add("testing_discipline_group")
+        let title = document.createElement("p")
+        title.classList.add("testing_discipline_group_title")
+        title.textContent = GROUP_LABELS[group_key]
+        let list = document.createElement("div")
+        list.classList.add("testing_discipline_list")
+        TEST_CATALOG[group_key].forEach((test_definition) => {
+            let option = document.createElement("label")
+            option.classList.add("testing_discipline_option")
+            let checkbox = document.createElement("input")
+            checkbox.type = "checkbox"
+            checkbox.checked = default_groups.includes(group_key)
+            checkbox.dataset.group = group_key
+            checkbox.dataset.key = test_definition.key
+            option.classList.toggle("checked", checkbox.checked)
+            let name = document.createElement("span")
+            name.textContent = test_definition.name
+            checkbox.addEventListener("change", () => {
+                option.classList.toggle("checked", checkbox.checked)
+            })
+            option.appendChild(checkbox)
+            option.appendChild(name)
+            list.appendChild(option)
+        })
+        group_div.appendChild(title)
+        group_div.appendChild(list)
+        testing_disciplines_groups.appendChild(group_div)
+    })
+}
+create_testing_btn.addEventListener("click", () => {
+    let name_input = document.querySelector(".testing_name")
+    let date_input = document.querySelector(".testing_date")
+    let time_input = document.querySelector(".testing_time")
+    let name = name_input.value.trim()
+    let date = date_input.value
+    let time = time_input.value
+    let location = document.querySelector(".testing_location").value.trim()
+    let coach = document.querySelector(".testing_coach").value.trim()
+    let category = document.querySelector(".testing_category").value
+    let notes = document.querySelector(".testing_notes").value.trim()
+    let selected_players = Array.from(testing_players_list.querySelectorAll("input:checked")).map((checkbox) => checkbox.value)
+    let selected_tests = Array.from(testing_disciplines_groups.querySelectorAll("input:checked"))
+    clearTestingErrors()
+    let has_error = false
+    if (!name) {
+        name_input.classList.add("input_error")
+        has_error = true
+    }
+    if (!date) {
+        date_input.classList.add("input_error")
+        has_error = true
+    }
+    if (!time) {
+        time_input.classList.add("input_error")
+        has_error = true
+    }
+    if (selected_players.length === 0) {
+        testing_players_list.classList.add("section_error")
+        has_error = true
+    }
+    if (selected_tests.length === 0) {
+        testing_disciplines_groups.classList.add("section_error")
+        has_error = true
+    }
+    if (has_error) {
+        return
+    }
+    let session = new TestingSession(name, date, time, location, coach, category, notes)
+})
+function appendTestingSession(session) {
+    let item = document.createElement("div")
+    item.classList.add("testing_item")
+    let label = document.createElement("p")
+    label.classList.add("testing_item_label")
+    label.textContent = "Performance Test"
+    let name = document.createElement("p")
+    name.classList.add("testing_item_name")
+    name.textContent = session.name
+    let info = document.createElement("p")
+    info.classList.add("testing_item_info")
+    info.textContent = session.date + (session.time ? " · " + session.time : "")
+    let stats = document.createElement("div")
+    stats.classList.add("testing_item_stats")
+    let stats_left = document.createElement("div")
+    stats_left.classList.add("testing_item_stats_left")
+    let players_count_span = document.createElement("span")
+    players_count_span.textContent = session.players.length + " PLAYERS"
+    let tests_count_span = document.createElement("span")
+    tests_count_span.textContent = session.tests.length + " TESTS"
+    stats_left.appendChild(players_count_span)
+    stats_left.appendChild(tests_count_span)
+    let status_badge = document.createElement("span")
+    status_badge.classList.add("testing_status_badge", "status_" + session.status)
+    status_badge.textContent = session.status.replace("_", " ")
+    stats.appendChild(stats_left)
+    stats.appendChild(status_badge)
+    item.appendChild(label)
+    item.appendChild(name)
+    item.appendChild(info)
+    item.appendChild(stats)
+    item.addEventListener("click", () => {
+        showTestingProtocol(session)
+    })
+    training_list.appendChild(item)
+    session.element = item
+}
+function showTestingProtocol(session) {
+    training_list.style.display = "none"
+    document.querySelector(".training_header").style.display = "none"
+    testing_protocol_page.style.display = "flex"
+    active_testing_session = session
+    testing_protocol_name.textContent = session.name
+    testing_protocol_meta.textContent = session.date + (session.time ? " · " + session.time : "") + " · " + (session.location || "No location set")
+    testing_protocol_players_count.textContent = session.players.length + " PLAYERS"
+    testing_protocol_tests_count.textContent = session.tests.length + " TESTS"
+    testing_protocol_status_badge.textContent = session.status.replace("_", " ")
+    testing_protocol_status_badge.className = "testing_status_badge status_" + session.status
+        testing_protocol_list.innerHTML = ""
+    session.tests.forEach((test, index) => {
+        let row = document.createElement("div")
+        row.classList.add("testing_protocol_row")
+        let name = document.createElement("span")
+        name.classList.add("testing_protocol_row_name")
+        name.textContent = String(index + 1).padStart(2, "0") + ". " + test.name
+        let badge = document.createElement("span")
+        badge.classList.add("testing_status_badge", "status_" + test.status)
+        badge.textContent = test.status.replace("_", " ")
+        row.appendChild(name)
+        row.appendChild(badge)
+        row.addEventListener("click", () => {
+            showTestDetail(session, test)
+        })
+        testing_protocol_list.appendChild(row)
+    })
+}
+back_to_trainings_from_protocol_btn.addEventListener("click", () => {
+    testing_protocol_page.style.display = "none"
+    training_list.style.display = "flex"
+    document.querySelector(".training_header").style.display = "flex"
+    active_testing_session = null
+})
+back_to_testing_protocol_btn.addEventListener("click", () => {
+    testing_test_detail_page.style.display = "none"
+    showTestingProtocol(active_testing_session)
+})
+function showTestDetail(session, test) {
+    testing_protocol_page.style.display = "none"
+    testing_test_detail_page.style.display = "flex"
+    active_testing_session = session
+    active_testing_test = test
+    testing_test_detail_category.textContent = GROUP_LABELS[test.group].toUpperCase()
+    testing_test_detail_name.textContent = test.name
+    testing_test_detail_measurement.textContent = "Measured: " + MEASUREMENT_LABELS[test.measurement]
+    testing_test_detail_unit.textContent = "Unit: " + test.unit
+    testing_test_detail_attempts.textContent = "Attempts: " + test.attempts
+    testing_instructions_text.textContent = TEST_INSTRUCTIONS[test.key]
+    renderTestResults()
+}
+function getTestResultEntry(test, player_name) {
+    let entry = test.results.find((result) => result.player === player_name)
+    if (!entry) {
+        entry = { player: player_name, attempts: [], best: null, successful: null, total: null, percentage: null, note: "" }
+        test.results.push(entry)
+    }
+    return entry
+}
+function renderTestResults() {
+    testing_results_list.innerHTML = ""
+    active_testing_session.players.forEach((player_name) => {
+        let entry = getTestResultEntry(active_testing_test, player_name)
+        testing_results_list.appendChild(createTestResultRow(entry, active_testing_test))
+    })
+}
+function createTestResultRow(entry, test) {
+    let row = document.createElement("div")
+    row.classList.add("testing_result_row")
+    let name = document.createElement("p")
+    name.classList.add("testing_result_player_name")
+    name.textContent = entry.player
+    let inputs = document.createElement("div")
+    inputs.classList.add("testing_result_inputs")
+    if (test.measurement === "time") {
+        for (let i = 0; i < test.attempts; i++) {
+            let attempt_group = document.createElement("div")
+            attempt_group.classList.add("testing_attempt_group")
+            let attempt_label = document.createElement("span")
+            attempt_label.classList.add("testing_attempt_label")
+            attempt_label.textContent = getOrdinal(i + 1) + " attempt"
+            let attempt_input = document.createElement("input")
+            attempt_input.type = "number"
+            attempt_input.step = "0.01"
+            attempt_input.classList.add("testing_attempt_input")
+            attempt_input.placeholder = "0.00"
+            attempt_input.value = entry.attempts[i] !== undefined ? entry.attempts[i] : ""
+            let attempt_unit = document.createElement("span")
+            attempt_unit.classList.add("testing_attempt_unit")
+            attempt_unit.textContent = test.unit
+            attempt_group.appendChild(attempt_label)
+            attempt_group.appendChild(attempt_input)
+            attempt_group.appendChild(attempt_unit)
+            inputs.appendChild(attempt_group)
+        }
+    } 
+    else if (test.measurement === "fraction") {
+        let successful_input = document.createElement("input")
+        successful_input.type = "number"
+        successful_input.classList.add("testing_successful_input")
+        successful_input.placeholder = "Successful"
+        successful_input.value = entry.successful !== null ? entry.successful : ""
+        let total_input = document.createElement("input")
+        total_input.type = "number"
+        total_input.classList.add("testing_total_input")
+        total_input.placeholder = "Total"
+        total_input.value = entry.total !== null ? entry.total : ""
+        inputs.appendChild(successful_input)
+        inputs.appendChild(total_input)
+    } 
+    else {
+        let value_input = document.createElement("input")
+        value_input.type = "number"
+        value_input.step = "0.01"
+        value_input.classList.add("testing_value_input")
+        value_input.placeholder = test.unit
+        value_input.value = entry.best !== null ? entry.best : ""
+        inputs.appendChild(value_input)
+    }
+    let computed = document.createElement("p")
+    computed.classList.add("testing_result_computed")
+    computed.textContent = formatTestResult(entry, test)
+    let note_input = document.createElement("input")
+    note_input.type = "text"
+    note_input.classList.add("testing_result_note")
+    note_input.placeholder = TEST_NOTE_PLACEHOLDERS[test.key]
+    note_input.value = entry.note || ""
+    row.appendChild(name)
+    row.appendChild(inputs)
+    row.appendChild(computed)
+    row.appendChild(note_input)
+    return row
+}
+function formatTestResult(entry, test) {
+    if (test.measurement === "fraction") {
+        return entry.percentage !== null ? entry.successful + "/" + entry.total + " (" + entry.percentage + "%)" : "—"
+    }
+    return entry.best !== null ? entry.best + " " + test.unit : "—"
+}
+save_testing_results_btn.addEventListener("click", () => {
+    let rows = testing_results_list.querySelectorAll(".testing_result_row")
+    rows.forEach((row, index) => {
+        let entry = active_testing_test.results[index]
+        if (active_testing_test.measurement === "time") {
+            let attempt_values = Array.from(row.querySelectorAll(".testing_attempt_input")).map((input) => parseFloat(input.value)).filter((value) => !isNaN(value))
+            entry.attempts = attempt_values
+            entry.best = attempt_values.length > 0 ? Math.min(...attempt_values) : null
+        } else if (active_testing_test.measurement === "fraction") {
+            let successful_value = parseFloat(row.querySelector(".testing_successful_input").value)
+            let total_value = parseFloat(row.querySelector(".testing_total_input").value)
+            entry.successful = isNaN(successful_value) ? null : successful_value
+            entry.total = isNaN(total_value) ? null : total_value
+            entry.percentage = (entry.total && entry.total > 0) ? Math.round((entry.successful / entry.total) * 100) : null
+        } else {
+            let value = parseFloat(row.querySelector(".testing_value_input").value)
+            entry.best = isNaN(value) ? null : value
+        }
+        entry.note = row.querySelector(".testing_result_note").value
+    })
+    updateTestStatus(active_testing_test)
+    updateTestingSessionStatus(active_testing_session)
+    renderTestResults()
+})
+function hasTestResult(entry, test) {
+    if (test.measurement === "fraction") {
+        return entry.percentage !== null
+    }
+    return entry.best !== null
+}
+function updateTestStatus(test) {
+    let completed_count = test.results.filter((entry) => hasTestResult(entry, test)).length
+    if (completed_count === 0) {
+        test.status = "not_started"
+    } else if (completed_count === test.results.length) {
+        test.status = "completed"
+    } else {
+        test.status = "in_progress"
+    }
+}
+function updateTestingSessionStatus(session) {
+    let completed_count = session.tests.filter((test) => test.status === "completed").length
+    let started_count = session.tests.filter((test) => test.status !== "not_started").length
+    if (completed_count === session.tests.length) {
+        session.status = "completed"
+    } else if (started_count > 0) {
+        session.status = "in_progress"
+    } else {
+        session.status = "not_started"
+    }
+    let card_badge = session.element.querySelector(".testing_status_badge")
+    card_badge.className = "testing_status_badge status_" + session.status
+    card_badge.textContent = session.status.replace("_", " ")
+}
 
 matches_btn.addEventListener("click", () => {
     setActiveSidebarButton(matches_btn)
@@ -514,7 +1045,7 @@ function validatePlayer(name, surname, age, height, weight, position) {
     if (!surname) {
         errors.push({ input: '.new_player_surname', message: 'Surname is required.' })
     }
-    if (age === '' || isNaN(age) || age < 14 || age > 60) {
+    if (age === '' || isNaN(age) || age < 4 || age > 60) {
         errors.push({ input: '.new_player_age', message: 'Age is required.' })
     }
     if (height === '' || isNaN(height) || height < 100 || height > 220) {
@@ -532,14 +1063,9 @@ function showPlayerErrors(errors) {
     document.querySelectorAll('.new_player_info input, .new_player_info select').forEach((field) => {
         field.classList.remove('input_error')
     })
-    new_player_errors.innerHTML = ''
     errors.forEach((error) => {
-        let message = document.createElement('p')
-        message.textContent = error.message
-        new_player_errors.appendChild(message)
         document.querySelector(error.input).classList.add('input_error')
     })
-    new_player_errors.style.display = errors.length > 0 ? 'block' : 'none'
 }
 
 function clearPlayerForm() {
@@ -668,8 +1194,8 @@ function showTrainingDetails(training) {
 }
 
 function updateTrainingCount() {
-    training_subtitle.textContent =
-        trainings.length + " trainings"
+    let total_count = trainings.length + testing_sessions.length
+    training_subtitle.textContent = total_count + " trainings"
 }
 
 // Training details tabs

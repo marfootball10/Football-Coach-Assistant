@@ -9,11 +9,10 @@
             <div class = 'left_sidebar'>
                 <div class="sidebar_header">
                     <div class="sidebar_logo">
-                        <!-- Logo doplníme neskôr -->
-                        <div class="logo_placeholder"></div>
+                        <img src="assets/fca-logo.png" alt="FCA Logo">
+                        <span class="sidebar_brand_title">F<span>C</span>A</span>
                     </div>
                     <div class="sidebar_brand">
-                        <span class="sidebar_brand_title">FCA</span>
                         <span class="sidebar_brand_subtitle">FOOTBALL COACH ASSISTANT</span>
                     </div>
                 </div>
@@ -175,7 +174,6 @@
                         <p>Add a new player</p>
                         <button class = 'save_player'>Save player</button>
                     </div>
-                    <div class="new_player_errors"></div>
                     <div class = 'new_player_info'>
                         <div class = 'new_player_first_row'>
                             <div class = 'new_player_name_div'>
@@ -272,7 +270,10 @@
                             <p class="training_title">Trainings</p>
                             <p class="training_subtitle">0 trainings</p>
                         </div>
+                        <div class="training_header_actions">
+                        <button class="view_training_btn add_testing_btn">+ Test Training</button>
                         <button class="add_training_btn">+ Add training</button>
+                    </div>
                     </div>
                     <div class="training_list"></div>
                     <div class="training_details_page">
@@ -370,6 +371,107 @@
                             </div>
                             <div class="attendance_list"></div>
                         </div>
+                    </div>
+                    <div class="new_player_div testing_session_div">
+                        <div class="new_player_introduction">
+                            <button class="go_back_to_players back_to_trainings_from_testing_btn">Back to trainings</button>
+                            <p>Create Testing Session</p>
+                            <button class="save_player create_testing_btn">Create Test</button>
+                        </div>
+                        <div class="new_player_info testing_session_info">
+                            <div class="new_player_first_row">
+                                <div class="new_player_name_div">
+                                    <label for="testing_name">Test name</label>
+                                    <input type="text" class="testing_name" placeholder="e.g. Physical Performance Test">
+                                </div>
+                                <div class="new_player_position_div">
+                                    <label for="testing_category">Category</label>
+                                    <select class="testing_category">
+                                        <option value="full_performance">Full Performance Test</option>
+                                        <option value="physical">Physical Test</option>
+                                        <option value="technical">Technical Test</option>
+                                        <option value="tactical">Tactical Test</option>
+                                        <option value="mental">Mental Test</option>
+                                        <option value="custom">Custom Test</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="new_player_second_row">
+                                <div class="new_player_age_div">
+                                    <label for="testing_date">Date</label>
+                                    <input type="date" class="testing_date">
+                                </div>
+                                <div class="new_player_height_div">
+                                    <label for="testing_time">Time</label>
+                                    <input type="time" class="testing_time">
+                                </div>
+                            </div>
+                            <div class="new_player_third_row">
+                                <div class="new_player_weight_div">
+                                    <label for="testing_location">Location</label>
+                                    <input type="text" class="testing_location" placeholder="e.g. Training Ground">
+                                </div>
+                                <div class="new_player_position_div">
+                                    <label for="testing_coach">Coach</label>
+                                    <input type="text" class="testing_coach" placeholder="Coach name">
+                                </div>
+                            </div>
+                            <div class="notes_about_new_player_div">
+                                <label for="testing_notes">Notes</label>
+                                <input type="text" class="testing_notes" placeholder="Notes about the testing session...">
+                            </div>
+                        </div>
+                        <div class="testing_players_section">
+                            <div class="testing_section_header">
+                                <p class="testing_section_title">Players</p>
+                                <label class="testing_all_players_toggle">
+                                    <input type="checkbox" class="testing_all_players_checkbox">
+                                    All players
+                                </label>
+                            </div>
+                            <div class="testing_players_list"></div>
+                        </div>
+                        <div class="testing_disciplines_section">
+                            <p class="testing_section_title">Test disciplines</p>
+                            <div class="testing_disciplines_groups"></div>
+                        </div>
+                    </div>
+                    <div class="training_details_page testing_protocol_page">
+                        <div class="training_details_top">
+                            <button class="back_to_trainings_from_protocol_btn">← Back to trainings</button>
+                        </div>
+                        <div class="testing_protocol_header">
+                            <p class="testing_protocol_name"></p>
+                            <p class="testing_protocol_meta"></p>
+                            <div class="testing_protocol_summary">
+                                <span class="testing_protocol_players_count"></span>
+                                <span class="testing_protocol_tests_count"></span>
+                                <span class="testing_protocol_status_badge"></span>
+                            </div>
+                        </div>
+                        <p class="testing_protocol_label">Test protocol</p>
+                        <div class="testing_protocol_list"></div>
+                    </div>
+                    <div class="training_details_page testing_test_detail_page">
+                        <div class="training_details_top">
+                            <button class="back_to_testing_protocol_btn">← Back to protocol</button>
+                        </div>
+                        <div class="testing_test_detail_header">
+                            <p class="testing_test_detail_category"></p>
+                            <p class="testing_test_detail_name"></p>
+                            <div class="testing_test_detail_meta">
+                                <span class="testing_test_detail_measurement"></span>
+                                <span class="testing_test_detail_unit"></span>
+                                <span class="testing_test_detail_attempts"></span>
+                            </div>
+                        </div>
+                        <div class="testing_instructions_card">
+                            <p class="training_detail_label">COACH INSTRUCTIONS</p>
+                            <p class="testing_instructions_text"></p>
+                        </div>
+                        <p class="testing_protocol_label">Player results</p>
+                        <div class="testing_results_list"></div>
+                        <button class="save_testing_results_btn">Save Results</button>
                     </div>
                 </div>
                 <dialog class="training_dialog">

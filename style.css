@@ -61,6 +61,61 @@ select {
     box-sizing: border-box;
 }
 
+/* SIDEBAR HEADER FCA BRAND */
+.sidebar_header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 10px 15px 10px;
+}
+
+/* LOGO + FCA */
+.sidebar_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.sidebar_logo img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.sidebar_brand_title {
+    color: #f8fafc;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+
+.sidebar_brand_title span {
+    color: #00b87c;
+}
+
+
+/* BRAND SUBTITLE */
+.sidebar_brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.sidebar_brand_subtitle {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+}
+
 .btns_sidebar {
     width: 100%;
     height: 38px;
@@ -131,7 +186,8 @@ select {
 #performance_btn.active:hover i,
 #analysis_btn.active:hover i {
     color: #00b87c;
-}#dashboard_btn.active,
+}
+#dashboard_btn.active,
 #players_btn.active,
 #training_btn.active,
 #matches_btn.active,
@@ -1190,7 +1246,9 @@ select {
     box-sizing: border-box;
 }
 .back_to_trainings_btn,
-.back_to_matches_btn {
+.back_to_matches_btn,
+.back_to_trainings_from_protocol_btn,
+.back_to_testing_protocol_btn {
     padding: 0;
     border: none;
     background: transparent;
@@ -1199,7 +1257,9 @@ select {
     cursor: pointer;
 }
 .back_to_trainings_btn:hover,
-.back_to_matches_btn:hover {
+.back_to_matches_btn:hover,
+.back_to_trainings_from_protocol_btn:hover,
+.back_to_testing_protocol_btn:hover {
     color: #f8fafc;
 }
 .delete_training_btn,
@@ -1527,6 +1587,401 @@ select {
     cursor: pointer;
 }
 
+/* =========================================
+    TEST TRAINING
+========================================= */
+
+.training_header_actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.testing_players_section,
+.testing_disciplines_section {
+    width: 100%;
+    max-width: 700px;
+    margin-top: 30px;
+}
+.testing_section_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.testing_section_title {
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.testing_all_players_toggle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    color: #cbd5e1;
+    font-size: 11px;
+    cursor: pointer;
+}
+.testing_players_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+.testing_player_option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 11px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #0f1724;
+    color: #cbd5e1;
+    font-size: 11px;
+    cursor: pointer;
+}
+.testing_player_option:hover {
+    border-color: #28506a;
+}
+.testing_player_option.checked {
+    border-color: #087c69;
+    background-color: #0d2b25;
+    color: #00d6a3;
+}
+.testing_discipline_group {
+    margin-bottom: 16px;
+}
+.testing_discipline_group_title {
+    color: #94a3b8;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+.testing_discipline_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+.testing_discipline_option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 11px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #0f1724;
+    color: #cbd5e1;
+    font-size: 11px;
+    cursor: pointer;
+}
+.testing_discipline_option:hover {
+    border-color: #28506a;
+}
+.testing_discipline_option.checked {
+    border-color: #087c69;
+    background-color: #0d2b25;
+    color: #00d6a3;
+}
+.testing_item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #0f1724;
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    padding: 18px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.testing_item:hover {
+    background-color: #111c2b;
+    border-color: #28506a;
+}
+.testing_item_label {
+    color: #00d6a3;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+}
+.testing_item_name {
+    color: #f8fafc;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+.testing_item_info {
+    color: #64748b;
+    font-size: 13px;
+    margin: 0 0 14px 0;
+}
+.testing_item_stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.testing_item_stats_left {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    color: #94a3b8;
+    font-size: 11px;
+}
+.testing_status_badge {
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 9px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.testing_status_badge.status_not_started {
+    border: 1px solid #334155;
+    background-color: #0f1724;
+    color: #94a3b8;
+}
+.testing_status_badge.status_in_progress {
+    border: 1px solid #b45309;
+    background-color: #2a1a08;
+    color: #f97316;
+}
+.testing_status_badge.status_completed {
+    border: 1px solid #087c69;
+    background-color: #082c2a;
+    color: #00d6a3;
+}
+.testing_protocol_header {
+    padding: 18px 20px;
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.testing_protocol_name {
+    margin: 0 0 6px 0;
+    color: #f8fafc;
+    font-size: 17px;
+    font-weight: 600;
+}
+.testing_protocol_meta {
+    margin: 0 0 10px 0;
+    color: #94a3b8;
+    font-size: 11px;
+}
+.testing_protocol_summary {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.testing_protocol_summary span {
+    color: #64748b;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.testing_protocol_label {
+    margin: 20px 0 10px 0;
+    color: #64748b;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.testing_protocol_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.testing_protocol_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #0f1724;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.testing_protocol_row:hover {
+    border-color: #28506a;
+}
+.testing_protocol_row_name {
+    color: #cbd5e1;
+    font-size: 12px;
+}
+.testing_protocol_note {
+    margin-top: 16px;
+    color: #64748b;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.section_error {
+    border: 1px solid #ef4444;
+    border-radius: 4px;
+    padding: 10px;
+}
+.new_player_info input[type="date"]::-webkit-calendar-picker-indicator,
+.new_player_info input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(75%);
+    cursor: pointer;
+}
+
+.testing_test_detail_header {
+    padding: 18px 20px;
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.testing_test_detail_category {
+    margin: 0 0 6px 0;
+    color: #00d6a3;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.testing_test_detail_name {
+    margin: 0 0 10px 0;
+    color: #f8fafc;
+    font-size: 17px;
+    font-weight: 600;
+}
+.testing_test_detail_meta {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.testing_test_detail_meta span {
+    color: #64748b;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.testing_instructions_card {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #1e293b;
+    border-radius: 5px;
+    background-color: #0f1724;
+    box-sizing: border-box;
+}
+.testing_instructions_text {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 11px;
+    line-height: 1.6;
+}
+.testing_results_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.testing_result_row {
+    display: grid;
+    grid-template-columns: 140px 1fr 100px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #080b12;
+    box-sizing: border-box;
+}
+.testing_result_player_name {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 11px;
+    font-weight: 600;
+}
+.testing_result_inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+.testing_attempt_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+.testing_attempt_label {
+    color: #64748b;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.testing_attempt_input,
+.testing_successful_input,
+.testing_total_input,
+.testing_value_input {
+    width: 70px;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #0f1724;
+    color: #cbd5e1;
+    font-size: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+.testing_attempt_unit {
+    color: #64748b;
+    font-size: 8px;
+}
+.testing_attempt_input:focus,
+.testing_successful_input:focus,
+.testing_total_input:focus,
+.testing_value_input:focus {
+    border-color: #087c69;
+}
+.testing_result_computed {
+    margin: 0;
+    color: #00d6a3;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+.testing_result_note {
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background-color: #0f1724;
+    color: #cbd5e1;
+    font-size: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+.testing_result_note:focus {
+    border-color: #087c69;
+}
+.save_testing_results_btn {
+    margin-top: 16px;
+    align-self: flex-start;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    background-color: #00b87c;
+    color: #06100d;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.save_testing_results_btn:hover {
+    background-color: #00d6a3;
+}
 
 /* =========================================
    TRAINING DIALOG BUTTONS
