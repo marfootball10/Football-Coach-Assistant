@@ -7,13 +7,43 @@
     <body>
         <div class = 'main'>
             <div class = 'left_sidebar'>
+                <div class="sidebar_header">
+                    <div class="sidebar_logo">
+                        <!-- Logo doplníme neskôr -->
+                        <div class="logo_placeholder"></div>
+                    </div>
+                    <div class="sidebar_brand">
+                        <span class="sidebar_brand_title">FCA</span>
+                        <span class="sidebar_brand_subtitle">FOOTBALL COACH ASSISTANT</span>
+                    </div>
+                </div>
                 <button class = 'out_of_menu'>
                     ✕
                 </button>
-                <button class = 'btns_sidebar' id = 'dashboard_btn'>Dashboard</button>
-                <button class = 'btns_sidebar' id = 'players_btn'>Players</button>
-                <button class = 'btns_sidebar' id = 'training_btn'>Trainings</button>
-                <button class = 'btns_sidebar' id = 'matches_btn'>Matches</button>
+                <button class = 'btns_sidebar' id = 'dashboard_btn'>
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class = 'btns_sidebar' id = 'players_btn'>
+                    <i data-lucide="users"></i>
+                    <span>Players</span>
+                </button>
+                <button class = 'btns_sidebar' id = 'training_btn'>
+                    <i data-lucide="dumbbell"></i>
+                    <span>Training</span>
+                </button>
+                <button class = 'btns_sidebar' id = 'matches_btn'>
+                    <i data-lucide="trophy"></i>
+                    <span>Matches</span>
+                </button>
+                <button class = 'btns_sidebar' id = 'performance_btn'>
+                    <i data-lucide="chart-no-axes-combined"></i>
+                    <span>Performance</span>
+                </button>
+                <button class = 'btns_sidebar' id = 'analysis_btn'>
+                    <i data-lucide="scan-search"></i>
+                    <span>Analysis</span>
+                </button>
             </div>
             <div class = 'content'>
                 <button class='menu_toggle'>
@@ -145,6 +175,7 @@
                         <p>Add a new player</p>
                         <button class = 'save_player'>Save player</button>
                     </div>
+                    <div class="new_player_errors"></div>
                     <div class = 'new_player_info'>
                         <div class = 'new_player_first_row'>
                             <div class = 'new_player_name_div'>
@@ -168,14 +199,18 @@
                                 <input
                                     type = "number"
                                     class = 'new_player_age'
-                                    placeholder = "Add a player age">
+                                    placeholder = "Add a player age"
+                                    min = "4"
+                                    max = "60">
                             </div>
                             <div class = 'new_player_height_div'>
                                 <label for = "new_player_height">Height</label>
                                 <input
                                     type = "number"
                                     class = 'new_player_height'
-                                    placeholder = "Add a player height">
+                                    placeholder = "Add a player height"
+                                    min = "100"
+                                    max = "220">
                             </div>
                         </div>
                         <div class = 'new_player_third_row'>
@@ -184,7 +219,9 @@
                                 <input
                                     type = "number"
                                     class = 'new_player_weight'
-                                    placeholder = "Add a player weight">
+                                    placeholder = "Add a player weight"
+                                    min = "30"
+                                    max = "150">
                             </div>
                             <div class = 'new_player_position_div'>
                                 <label for = "new_player_position">Position</label>
@@ -241,6 +278,7 @@
                     <div class="training_details_page">
                         <div class="training_details_top">
                             <button class="back_to_trainings_btn">← Back to trainings</button>
+                            <button class="delete_training_btn">Delete training</button>
                         </div>
                         <div class="training_details_header">
                             <div class="training_details_header_left">
@@ -321,6 +359,7 @@
                                 <span class="legend_item legend_pass">Pass</span>
                                 <button class="add_token_btn own_token" data-team="own">Our team</button>
                                 <button class="add_token_btn opponent_token" data-team="opponent">Opponent</button>
+                                <button class="add_token_btn ball_token" data-team="ball">⚽ Ball</button>
                                 <span class="board_hint">Drag tokens to move them</span>
                             </div>
                         </div>
@@ -514,6 +553,109 @@
                         <button class = 'new_match_btn'> + New match</button>
                     </div>
                     <div class="match_list"></div>
+                    <div class="training_details_page match_details_page">
+                        <div class="training_details_top">
+                            <button class="back_to_matches_btn">← Back to matches</button>
+                            <button class="delete_match_btn">Delete match</button>
+                        </div>
+                        <div class="training_details_header">
+                            <div class="match_details_header_top">
+                                <span class="match_details_league"></span>
+                                <div class="match_details_badges">
+                                    <span class="match_details_place_badge"></span>
+                                    <span class="training_details_status">Planned</span>
+                                </div>
+                            </div>
+                            <div class="match_details_teams">
+                                <div class="match_details_team match_details_own">
+                                    <p class="match_details_team_name match_details_own_name"></p>
+                                    <p class="match_details_team_label match_details_own_label"></p>
+                                </div>
+                                <div class="match_details_team_center">
+                                    <p class="match_details_vs">VS</p>
+                                    <p class="match_details_datetime"></p>
+                                </div>
+                                <div class="match_details_team match_details_opponent">
+                                    <p class="match_details_team_name match_details_opponent_name"></p>
+                                    <p class="match_details_team_label">Opponent</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="training_details_tabs">
+                            <button class="training_tab active">Information</button>
+                            <button class="training_tab">Lineup <span class="lineup_count">(0/11)</span></button>
+                            <button class="training_tab">Tactical board</button>
+                        </div>
+                        <div class="training_information match_information">
+                            <div class="training_detail_card">
+                                <div class="match_detail_card_header">
+                                    <p class="training_detail_label">MATCH DETAILS</p>
+                                    <button class="go_back_to_players edit_match_details_btn">Edit</button>
+                                </div>
+                                <div class="training_detail_row">
+                                    <span>Date</span>
+                                    <strong class="match_info_date"></strong>
+                                </div>
+                                <div class="training_detail_row">
+                                    <span>Kickoff time</span>
+                                    <strong class="match_info_time"></strong>
+                                </div>
+                                <div class="training_detail_row">
+                                    <span>Competition</span>
+                                    <strong class="match_info_league"></strong>
+                                </div>
+                                <div class="training_detail_row">
+                                    <span>Place</span>
+                                    <strong class="match_info_place"></strong>
+                                </div>
+                                <div class="training_detail_row">
+                                    <span>Formation</span>
+                                    <strong class="match_info_formation"></strong>
+                                </div>
+                            </div>
+                            <div class="training_detail_card">
+                                <p class="training_detail_label">NOTES</p>
+                                <p class="training_detail_goal match_info_notes"></p>
+                            </div>
+                        </div>
+                        <div class="training_attendance match_lineup">
+                            <div class="attendance_header">
+                                <p class="attendance_title">Lineup</p>
+                                <p class="attendance_subtitle">Select players for the lineup</p>
+                            </div>
+                            <div class="lineup_list"></div>
+                        </div>
+                        <div class="training_board match_board">
+                            <div class="board_phase_tabs">
+                                <button class="board_phase_tab active" data-phase="attack">Attack</button>
+                                <button class="board_phase_tab" data-phase="defense">Defense</button>
+                                <button class="board_phase_tab" data-phase="transition_to_attack">Transition to attack</button>
+                                <button class="board_phase_tab" data-phase="transition_to_defense">Transition to defense</button>
+                                <button class="board_phase_tab" data-phase="set_pieces">Set pieces</button>
+                            </div>
+                            <div class="board_toolbar">
+                                <span class="board_toolbar_label">TOOLS</span>
+                                <button class="board_tool active" data-tool="select">Select</button>
+                                <button class="board_tool" data-tool="arrow">→ Arrow</button>
+                                <button class="board_tool" data-tool="movement">∿ Movement</button>
+                                <button class="board_tool" data-tool="pass">⇢ Pass</button>
+                                <button class="board_tool" data-tool="zone">▢ Zone</button>
+                                <button class="board_tool" data-tool="delete">✕ Delete</button>
+                                <button class="board_undo_btn">↺ Undo</button>
+                                <button class="board_clear_btn">Clear all</button>
+                            </div>
+                            <canvas class="tactical_board match_tactical_board" width="900" height="560"></canvas>
+                            <div class="board_legend">
+                                <span class="legend_item legend_arrow">Arrow</span>
+                                <span class="legend_item legend_movement">Movement</span>
+                                <span class="legend_item legend_pass">Pass</span>
+                                <button class="add_token_btn own_token" data-team="own">Our team</button>
+                                <button class="add_token_btn opponent_token" data-team="opponent">Opponent</button>
+                                <button class="add_token_btn ball_token" data-team="ball">⚽ Ball</button>
+                                <span class="board_hint">Drag tokens to move them</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <dialog class="match_dialog">
                     <form class="match_form">
@@ -559,8 +701,29 @@
                         </div>
                     </form>
                 </dialog>
+                <dialog class="training_dialog match_details_dialog">
+                    <form class="training_form match_details_form">
+                        <div class="training_dialog_header">
+                            <h2>Edit match details</h2>
+                            <button type="button" class="close_training_btn close_match_details_btn">×</button>
+                        </div>
+                        <div class="training_form_group">
+                            <label for="match_formation">Formation</label>
+                            <input type="text" id="match_formation" placeholder="e.g. 4-3-3">
+                        </div>
+                        <div class="training_form_group">
+                            <label for="match_notes">Notes</label>
+                            <textarea id="match_notes" placeholder="Notes about the match..."></textarea>
+                        </div>
+                        <div class="training_dialog_buttons">
+                            <button type="button" class="cancel_training_btn cancel_match_details_btn">Cancel</button>
+                            <button type="submit" class="save_training_btn">Save</button>
+                        </div>
+                    </form>
+                </dialog>
             </div>
         </div>
+        <script src="https://unpkg.com/lucide@latest"></script>
         <script src="script.js"></script>
     </body>
 </html>
